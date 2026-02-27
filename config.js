@@ -71,9 +71,9 @@ const SITE_CONFIG = {
     },
     {
       emoji: "💠",
-      image: "images/DSC_0735.JPG",
-      title: "Teal & Pink Mandala",
-      type: "Lippan Art · Circular Board · 14 inch",
+      image: "images/DSC_0939.JPG",
+      title: "Royal Elephant Lippan Art",
+      type: "A majestic white elephant adorned in festive jewellery and a richly decorated royal blanket, hand-sculpted on a vibrant red canvas with golden mirror dots — a symbol of strength, luck and celebration.",
       price: "$75",
       category: "Lippan Art",
       status: "available",
