@@ -15,7 +15,7 @@ const SITE_CONFIG = {
     years_experience: "5+",
     artworks_sold: "50+",
     art_styles: "10+",
-    whatsapp: "919472758363",
+    whatsapp: "0019472758363",
     photo: "",
   },
 
@@ -23,7 +23,7 @@ const SITE_CONFIG = {
   trending: [
     {
       emoji: "🪬",
-      image: "images/DSC_0730.JPG",
+      image: "Images/DSC_0730.JPG",
       title: "Lotus Garden Lippan Art",
       description: "Graceful pink Lotusin full bloom, hand-sculpted on a vibrant orange canvas with swirling stems, green leaves and scattered mirror dots — like a garden frozen in time..",
       tag: "🔥 Most Popular",
