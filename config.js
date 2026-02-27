@@ -15,7 +15,7 @@ const SITE_CONFIG = {
     years_experience: "5+",
     artworks_sold: "50+",
     art_styles: "10+",
-    whatsapp: "0019472758363",
+    whatsapp: "19472758363",
     photo: "",
   },
 
