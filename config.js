@@ -1,5 +1,5 @@
 // ============================================================
-//  KALA DEVI ARTS — EASY WEBSITE CONFIG
+//  SWETHA LINGALA ARTS — WEBSITE CONFIG
 //  Edit this file to update your website content.
 //  No coding knowledge needed!
 // ============================================================
@@ -8,112 +8,116 @@ const SITE_CONFIG = {
 
   // ── ARTIST INFO ──────────────────────────────────────────
   artist: {
-    name: "Kala Devi",                          // Your name
-    tagline: "Where Tradition Meets Beauty",    // Short tagline
-    bio_line1: "Born into a family of artisans, Kala Devi has spent over two decades mastering the ancient art forms of Madhubani, Warli, and Pattachitra painting.",
-    bio_line2: "Her work is a vibrant celebration of Indian mythology, nature, and folk traditions — created entirely by hand using natural pigments and handmade paper.",
-    years_experience: "20+",
-    artworks_sold: "500+",
-    art_styles: "30+",
-    whatsapp: "919999999999",   // Your WhatsApp number with country code, NO + sign
-                                 // Example: India +91 98765 43210 → "919876543210"
-    photo: "images/artist-photo.jpg",  // Put your photo in the images/ folder
+    name: "Swetha Lingala",
+    tagline: "Where Tradition Meets Beauty",
+    bio_line1: "Swetha Lingala is an Indian artist dedicated to bringing the beauty of traditional art forms into modern life. Rooted in the rich cultural heritage of India, her work celebrates techniques such as Lippan art and Madhubani painting, honoring the stories, motifs, and craftsmanship passed down through generations.",
+    bio_line2: "Driven by the belief that traditional art should continue to live, evolve, and inspire, Swetha's work brings warmth, culture, and meaning into the spaces it touches. Whether through intricate mirror-work, vibrant folk patterns, or tactile yarn designs, she aims to make every piece a reminder of heritage, beauty, and the joy of creating with one's hands.",
+    years_experience: "5+",
+    artworks_sold: "50+",
+    art_styles: "10+",
+    whatsapp: "919472758363",
+    photo: "",
   },
 
   // ── TRENDING ARTWORKS ────────────────────────────────────
-  // These appear in the "Trending This Season" section
-  // tag options: "🔥 Most Popular" | "⭐ Bestseller" | "🆕 New Arrival" | "💎 Premium"
   trending: [
     {
-      emoji: "🦚",                              // Shown if no image
-      image: "images/trending1.jpg",            // Your image file (optional)
-      title: "Madhubani Peacock Series",
-      description: "Vibrant peacock motifs in traditional Madhubani style with natural dyes on handmade paper.",
+      emoji: "🪬",
+      image: "images/DSC_0732.JPG",
+      title: "Lord Jagannath Lippan Art",
+      description: "A sacred and striking depiction of Lord Jagannath in traditional Lippan style with red lotus petals, mirror work, and a gold border.",
       tag: "🔥 Most Popular",
-      gradient: "linear-gradient(135deg, #C0392B, #FF6B00)",  // Background color if no image
+      gradient: "linear-gradient(135deg, #1a0000, #C0392B)",
     },
     {
-      emoji: "🪷",
-      image: "images/trending2.jpg",
-      title: "Lotus Warli Collection",
-      description: "Minimalist Warli tribal art blended with lotus motifs. Perfect for home décor and gifting.",
+      emoji: "🌸",
+      image: "images/DSC_0735.JPG",
+      title: "Teal & Pink Mandala",
+      description: "A vibrant mandala in teal, pink, and olive tones with intricate raised clay detailing and shimmering mirror embellishments.",
       tag: "⭐ Bestseller",
-      gradient: "linear-gradient(135deg, #6A0572, #C0392B)",
+      gradient: "linear-gradient(135deg, #006064, #880E4F)",
     },
     {
-      emoji: "🐘",
-      image: "images/trending3.jpg",
-      title: "Pattachitra Elephant Tales",
-      description: "Odisha's ancient Pattachitra tradition — intricate elephant designs on palm leaf and canvas.",
-      tag: "🆕 New Arrival",
-      gradient: "linear-gradient(135deg, #00897B, #FFB800)",
+      emoji: "🌿",
+      image: "images/DSC_0742.JPG",
+      title: "Emerald Gold Mandala",
+      description: "An elegant dark green and gold mandala with layered lotus petals and silver mirror work — a sophisticated statement piece.",
+      tag: "💎 Premium",
+      gradient: "linear-gradient(135deg, #1B5E20, #F9A825)",
     },
   ],
 
   // ── GALLERY ARTWORKS ─────────────────────────────────────
-  // These appear in the Art Gallery section with prices
-  // status options: "available" | "sold" | "new"
-  // category options: "Madhubani" | "Warli" | "Pattachitra" | "Custom" (used for filter buttons)
   gallery: [
     {
-      emoji: "🦋",
-      image: "images/art1.jpg",                 // Put your artwork image in images/ folder
-      title: "Butterfly Madhubani",
-      type: "Madhubani · Handmade Paper · 12×16 in",
-      price: "₹2,500",                          // Set to "On Request" for custom pieces
-      category: "Madhubani",
-      status: "new",                            // "available" | "sold" | "new"
+      emoji: "🌸",
+      image: "images/DSC_0729.JPG",
+      title: "Lotus Lippan Art",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Lippan Art",
+      status: "available",
       gradient: "linear-gradient(135deg, #FF6B00, #FFB800)",
     },
     {
-      emoji: "🌸",
-      image: "images/art2.jpg",
-      title: "Lotus Village Scene",
-      type: "Warli · Canvas · 18×24 in",
-      price: "₹4,200",
-      category: "Warli",
+      emoji: "🪬",
+      image: "images/DSC_0732.JPG",
+      title: "Lord Jagannath Lippan Art",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Lippan Art",
       status: "available",
-      gradient: "linear-gradient(135deg, #6A0572, #FF6B00)",
+      gradient: "linear-gradient(135deg, #1a0000, #C0392B)",
     },
     {
-      emoji: "🐦",
-      image: "images/art3.jpg",
-      title: "Sacred Bird Pattachitra",
-      type: "Pattachitra · Palm Leaf · 10×14 in",
-      price: "₹3,800",
-      category: "Pattachitra",
-      status: "sold",
-      gradient: "linear-gradient(135deg, #C0392B, #6A0572)",
+      emoji: "💠",
+      image: "images/DSC_0735.JPG",
+      title: "Teal & Pink Mandala",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Mandala",
+      status: "available",
+      gradient: "linear-gradient(135deg, #006064, #880E4F)",
     },
     {
       emoji: "🌺",
-      image: "images/art4.jpg",
-      title: "Festival Rangoli Design",
-      type: "Mixed Media · Canvas · 20×20 in",
-      price: "₹5,500",
-      category: "Madhubani",
+      image: "images/DSC_0738.JPG",
+      title: "Sunburst Mandala",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Mandala",
       status: "available",
-      gradient: "linear-gradient(135deg, #00897B, #FFB800)",
+      gradient: "linear-gradient(135deg, #B71C1C, #00897B)",
     },
     {
-      emoji: "🐘",
-      image: "images/art5.jpg",
-      title: "Royal Elephant March",
-      type: "Pattachitra · Canvas · 24×30 in",
-      price: "₹7,000",
-      category: "Pattachitra",
-      status: "new",
-      gradient: "linear-gradient(135deg, #FFB800, #C0392B)",
+      emoji: "🌼",
+      image: "images/DSC_0740.JPG",
+      title: "Yellow Blue Mandala",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Mandala",
+      status: "available",
+      gradient: "linear-gradient(135deg, #F9A825, #0288D1)",
     },
     {
-      emoji: "🌟",
-      image: "images/art6.jpg",
-      title: "Custom Portrait Art",
-      type: "Custom Order · Any Size · Your Choice",
+      emoji: "🌿",
+      image: "images/DSC_0742.JPG",
+      title: "Emerald Gold Mandala",
+      type: "Lippan Art · Circular Board · 14 inch",
+      price: "$75",
+      category: "Mandala",
+      status: "available",
+      gradient: "linear-gradient(135deg, #1B5E20, #F9A825)",
+    },
+    {
+      emoji: "🎨",
+      image: "images/DSC_0758.JPG",
+      title: "Custom Lippan Art",
+      type: "Custom Order · Any Size · Your Choice of Colors",
       price: "On Request",
       category: "Custom",
       status: "available",
-      gradient: "linear-gradient(135deg, #6A0572, #00897B)",
+      gradient: "linear-gradient(135deg, #6A0572, #FF6B00)",
     },
   ],
 
