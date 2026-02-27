@@ -83,17 +83,9 @@
       font-size: 6rem; box-shadow: 0 20px 60px rgba(192,57,43,0.2);
     }
     .about-image img { width: 100%; height: 100%; object-fit: cover; }
-    .about-badge {
-      position: absolute; bottom: -20px; right: -20px;
-      background: var(--gold); color: var(--dark); padding: 16px 20px;
-      border-radius: 16px; font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 700; text-align: center;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .about-badge small { display: block; font-family: 'Poppins', sans-serif; font-size: 0.7rem; font-weight: 500; }
     .about-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--dark); margin-bottom: 20px; }
     .about-content p { color: #5a3e28; line-height: 1.9; margin-bottom: 16px; font-size: 0.98rem; }
-    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0; }
     .stat { text-align: center; padding: 20px; background: var(--cream); border-radius: 12px; border-top: 3px solid var(--gold); }
     .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--saffron); }
     .stat-label { font-size: 0.78rem; color: #7a5a3a; font-weight: 500; margin-top: 4px; }
@@ -103,10 +95,10 @@
     #trending .section-title { color: #fff; }
     #trending .section-label { color: var(--gold); }
     .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
-    .trending-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,184,0,0.2); border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+    .trending-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,184,0,0.2); border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: zoom-in; }
     .trending-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .trending-img { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 5rem; overflow: hidden; }
-    .trending-img img { width: 100%; height: 100%; object-fit: cover; }
+    .trending-img { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 5rem; overflow: hidden; background: #111; }
+    .trending-img img { width: 100%; height: 100%; object-fit: contain; }
     .trending-info { padding: 20px; }
     .trending-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 6px; }
     .trending-info p { font-size: 0.85rem; color: #c4a07c; margin-bottom: 12px; }
@@ -121,9 +113,12 @@
     .art-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
     .art-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
     .art-card[data-status="sold"] { opacity: 0.85; }
-    .art-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; }
-    .art-img img { width: 100%; height: 100%; object-fit: cover; }
-    .art-badge { position: absolute; top: 14px; right: 14px; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+
+    /* ── IMAGE FIX: contain so full image shows, dark bg to fill gaps ── */
+    .art-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; background: #111; cursor: zoom-in; }
+    .art-img img { width: 100%; height: 100%; object-fit: contain; }
+
+    .art-badge { position: absolute; top: 14px; right: 14px; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; z-index: 1; }
     .badge-sold { background: var(--deep-red); }
     .badge-new  { background: var(--teal); }
     .art-info { padding: 20px; }
@@ -133,6 +128,28 @@
     .art-price { font-size: 1.3rem; font-weight: 700; color: var(--saffron); font-family: 'Playfair Display', serif; }
     .btn-enquire { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 8px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.3s, transform 0.2s; }
     .btn-enquire:hover { opacity: 0.85; transform: scale(1.03); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.93);
+      align-items: center; justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease;
+    }
+    .lightbox.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .lightbox-inner { position: relative; max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .lightbox-inner img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+    .lightbox-title { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.2rem; text-align: center; }
+    .lightbox-close {
+      position: absolute; top: -16px; right: -16px;
+      background: var(--saffron); color: #fff;
+      border: none; border-radius: 50%; width: 36px; height: 36px;
+      font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: var(--deep-red); }
 
     /* CONTACT */
     #contact { background: linear-gradient(135deg, var(--purple) 0%, var(--deep-red) 50%, var(--saffron) 100%); text-align: center; }
@@ -160,17 +177,12 @@
       .hamburger { display: flex; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .about-image { aspect-ratio: 3/2; font-size: 4rem; }
-      .about-badge { bottom: -14px; right: 10px; }
-    }
-    @media (max-width: 480px) {
-      .about-stats { grid-template-columns: 1fr 1fr; }
-      .stat:last-child { grid-column: span 2; }
+      .lightbox-inner img { max-height: 70vh; }
     }
   </style>
 </head>
 <body>
 
-<!-- Load your config first -->
 <script src="config.js"></script>
 
 <nav>
@@ -185,6 +197,15 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-title" id="lightbox-title"></div>
+  </div>
+</div>
 
 <section class="hero">
   <div class="hero-deco deco1"></div>
@@ -204,10 +225,6 @@
   <div class="about-grid">
     <div class="about-image-wrap">
       <div class="about-image" id="about-img-wrap">🎨</div>
-      <div class="about-badge">
-        <span style="font-size:1.8rem;">🏆</span><br/>
-        Award Winning<br/><small>Artist</small>
-      </div>
     </div>
     <div class="about-content">
       <div class="section-label">✦ About the Artist</div>
@@ -215,7 +232,6 @@
       <p id="about-bio1"></p>
       <p id="about-bio2"></p>
       <div class="about-stats">
-        <div class="stat"><div class="stat-num" id="stat-years"></div><div class="stat-label">Years of Craft</div></div>
         <div class="stat"><div class="stat-num" id="stat-sold"></div><div class="stat-label">Artworks Sold</div></div>
         <div class="stat"><div class="stat-num" id="stat-styles"></div><div class="stat-label">Art Styles</div></div>
       </div>
@@ -263,16 +279,23 @@
 <a class="float-wa" id="wa-float-btn" href="#" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
 
 <script>
+// ── Lightbox ──────────────────────────────────────────────────
+function openLightbox(src, title) {
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox-title").textContent = title;
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById("lightbox") && !e.target.classList.contains("lightbox-close")) return;
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") { document.getElementById("lightbox").classList.remove("open"); document.body.style.overflow = ""; } });
+
 // ── Helpers ──────────────────────────────────────────────────
 function waLink(number, msg) {
   return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
-}
-function imgOrEmoji(src, emoji, extraClass = "") {
-  if (src) {
-    // Try to load image; fallback to emoji if missing
-    return `<img src="${src}" alt="" onerror="this.parentElement.innerHTML='${emoji}'" />`;
-  }
-  return emoji;
 }
 
 // ── Populate from config ─────────────────────────────────────
@@ -296,7 +319,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("about-title").textContent = c.artist.name + " — A Storyteller in Colors";
   document.getElementById("about-bio1").textContent = c.artist.bio_line1;
   document.getElementById("about-bio2").textContent = c.artist.bio_line2;
-  document.getElementById("stat-years").textContent  = c.artist.years_experience;
   document.getElementById("stat-sold").textContent   = c.artist.artworks_sold;
   document.getElementById("stat-styles").textContent = c.artist.art_styles;
 
@@ -311,17 +333,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // ── Trending ──
   const tGrid = document.getElementById("trending-grid");
   c.trending.forEach(item => {
-    tGrid.innerHTML += `
-      <div class="trending-card">
-        <div class="trending-img" style="background:${item.gradient}">
-          ${item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.outerHTML='${item.emoji}'" />` : item.emoji}
-        </div>
-        <div class="trending-info">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <span class="trending-tag">${item.tag}</span>
-        </div>
+    const card = document.createElement("div");
+    card.className = "trending-card";
+    card.innerHTML = `
+      <div class="trending-img" style="background:${item.gradient}">
+        ${item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.outerHTML='<span style=font-size:5rem>${item.emoji}</span>'" />` : `<span style="font-size:5rem">${item.emoji}</span>`}
+      </div>
+      <div class="trending-info">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <span class="trending-tag">${item.tag}</span>
       </div>`;
+    if (item.image) {
+      card.querySelector(".trending-img").addEventListener("click", () => openLightbox(item.image, item.title));
+    }
+    tGrid.appendChild(card);
   });
 
   // ── Gallery filter buttons ──
@@ -352,21 +378,30 @@ document.addEventListener("DOMContentLoaded", function () {
       : "";
     const btnLabel = art.status === "sold" ? "Similar?" : "Enquire";
 
-    gGrid.innerHTML += `
-      <div class="art-card" data-category="${art.category}" data-status="${art.status}">
-        <div class="art-img" style="background:${art.gradient}">
-          ${badgeHTML}
-          ${art.image ? `<img src="${art.image}" alt="${art.title}" onerror="this.outerHTML='<span style=font-size:5rem>${art.emoji}</span>'" />` : `<span style="font-size:5rem">${art.emoji}</span>`}
-        </div>
-        <div class="art-info">
-          <h3>${art.title}</h3>
-          <div class="art-type">${art.type}</div>
-          <div class="art-footer">
-            <div class="art-price">${art.price}</div>
-            <a href="${waLink(wa, enquireMsg)}" class="btn-enquire" target="_blank">${btnLabel}</a>
-          </div>
+    const card = document.createElement("div");
+    card.className = "art-card";
+    card.dataset.category = art.category;
+    card.dataset.status = art.status;
+    card.innerHTML = `
+      <div class="art-img" style="background:${art.gradient}">
+        ${badgeHTML}
+        ${art.image ? `<img src="${art.image}" alt="${art.title}" onerror="this.outerHTML='<span style=font-size:5rem>${art.emoji}</span>'" />` : `<span style="font-size:5rem">${art.emoji}</span>`}
+      </div>
+      <div class="art-info">
+        <h3>${art.title}</h3>
+        <div class="art-type">${art.type}</div>
+        <div class="art-footer">
+          <div class="art-price">${art.price}</div>
+          <a href="${waLink(wa, enquireMsg)}" class="btn-enquire" target="_blank">${btnLabel}</a>
         </div>
       </div>`;
+
+    // Lightbox on image click
+    if (art.image) {
+      card.querySelector(".art-img").addEventListener("click", () => openLightbox(art.image, art.title));
+    }
+
+    gGrid.appendChild(card);
   });
 
   // ── Filter logic ──
