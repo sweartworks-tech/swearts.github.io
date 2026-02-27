@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("nav-logo").innerHTML = c.artist.name.split(" ")[0] + " <span>" + (c.artist.name.split(" ")[1] || "") + "</span>";
 
   // Hero
-  document.getElementById("hero-title").innerHTML = `Where <span>${c.artist.tagline.split(" ").slice(0,1).join(" ")}</span> ${c.artist.tagline.split(" ").slice(1).join(" ")}`;
+  document.getElementById("hero-title").innerHTML = `<span>${c.artist.tagline.split(" ").slice(0,1).join(" ")}</span> ${c.artist.tagline.split(" ").slice(1).join(" ")}`;
   document.getElementById("hero-sub").textContent = "Each piece is a journey through India's rich artistic heritage — handcrafted with love, passion, and generations of mastery.";
 
   // About
