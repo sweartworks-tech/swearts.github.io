@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="page-title">Handmade Traditional Art</title>
-  <meta name="description" content="Authentic handmade traditional art and designs. Explore our gallery of original artwork, available for purchase.">
+  <title>SweArts – Handmade Traditional Art</title>
+  <meta name="description" content="Authentic handmade traditional art and designs by SweArts. Explore Lippan Art, Yarn Art and more.">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,42 +17,32 @@
     body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
     /* NAV */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 1000;
-      background: rgba(26,10,0,0.95); backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 5%; border-bottom: 2px solid var(--gold);
-    }
-    .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); text-decoration: none; }
+    nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(26,10,0,0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 14px 5%; border-bottom: 2px solid var(--gold); }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); text-decoration: none; letter-spacing: 1px; }
     .logo span { color: var(--saffron); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { color: #f5e6c8; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: color 0.3s; position: relative; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+    .nav-links a { color: #f5e6c8; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: color 0.3s; position: relative; }
     .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
     .nav-links a:hover { color: var(--gold); }
     .nav-links a:hover::after { width: 100%; }
+    /* Real Instagram SVG icon */
+    .nav-instagram { display: flex; align-items: center; color: var(--gold); text-decoration: none; transition: transform 0.3s, color 0.3s; }
+    .nav-instagram:hover { color: var(--saffron); transform: scale(1.2); }
+    .nav-instagram svg { width: 22px; height: 22px; fill: currentColor; }
+    .nav-btn { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: opacity 0.3s; white-space: nowrap; }
+    .nav-btn:hover { opacity: 0.85; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 26px; height: 2px; background: var(--gold); }
 
     /* HERO */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1A0A00 0%, #3D0C02 40%, #6A0572 100%);
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 100px 5% 60px; position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23FFB800' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+    .hero { min-height: 100vh; background: linear-gradient(135deg, #1A0A00 0%, #3D0C02 40%, #6A0572 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23FFB800' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
     .hero-deco { position: absolute; border-radius: 50%; opacity: 0.1; }
     .deco1 { width: 400px; height: 400px; background: var(--gold); top: -100px; right: -100px; }
     .deco2 { width: 250px; height: 250px; background: var(--saffron); bottom: -60px; left: -60px; }
     .hero-content { position: relative; z-index: 1; max-width: 780px; }
-    .hero-badge {
-      display: inline-block; background: linear-gradient(90deg, var(--saffron), var(--gold));
-      color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; padding: 6px 18px; border-radius: 30px; margin-bottom: 24px;
-    }
+    .hero-badge { display: inline-block; background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 30px; margin-bottom: 24px; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.1; }
     .hero h1 span { background: linear-gradient(90deg, var(--gold), var(--saffron)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p { font-size: clamp(1rem, 2.5vw, 1.2rem); color: #d4b896; line-height: 1.8; margin-bottom: 36px; }
@@ -73,28 +63,34 @@
 
     /* ABOUT */
     #about { background: #fff; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto; }
-    .about-image-wrap { position: relative; }
-    .about-image {
-      width: 100%; aspect-ratio: 4/5;
-      background: linear-gradient(135deg, var(--saffron), var(--purple));
-      border-radius: 20px; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 6rem; box-shadow: 0 20px 60px rgba(192,57,43,0.2);
-    }
-    .about-image img { width: 100%; height: 100%; object-fit: cover; }
-    .about-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--dark); margin-bottom: 20px; }
-    .about-content p { color: #5a3e28; line-height: 1.9; margin-bottom: 16px; font-size: 0.98rem; }
-    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 32px 0; }
+    .about-intro { max-width: 760px; margin: 0 auto 50px; text-align: center; }
+    .about-intro p { font-size: 1.05rem; color: #5a3e28; line-height: 1.95; margin-bottom: 16px; }
+    .about-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; max-width: 400px; margin: 32px auto 0; }
     .stat { text-align: center; padding: 20px; background: var(--cream); border-radius: 12px; border-top: 3px solid var(--gold); }
     .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--saffron); }
     .stat-label { font-size: 0.78rem; color: #7a5a3a; font-weight: 500; margin-top: 4px; }
+
+    /* PROCESS PHOTO SCROLL */
+    .process-section { margin: 56px auto 0; max-width: 1100px; }
+    .process-section-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--dark); text-align: center; margin-bottom: 32px; }
+    .process-section-title span { color: var(--saffron); }
+    .process-scroll-wrap { position: relative; }
+    .process-scroll { display: flex; gap: 20px; overflow-x: auto; padding: 10px 4px 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+    .process-scroll::-webkit-scrollbar { height: 4px; }
+    .process-scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    .process-item { flex: 0 0 220px; scroll-snap-align: start; text-align: center; }
+    .process-photo { width: 220px; height: 220px; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, var(--saffron), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
+    .process-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .process-step-num { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.5); color: var(--gold); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+    .process-item h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .process-item p { font-size: 0.78rem; color: #9a7a5a; line-height: 1.5; }
+    .scroll-hint { text-align: center; font-size: 0.78rem; color: #c4a07c; margin-top: 8px; }
 
     /* TRENDING */
     #trending { background: linear-gradient(135deg, #1A0A00, #3D0C02); }
     #trending .section-title { color: #fff; }
     #trending .section-label { color: var(--gold); }
-    .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
     .trending-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,184,0,0.2); border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: zoom-in; }
     .trending-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
     .trending-img { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 5rem; overflow: hidden; background: #111; }
@@ -109,15 +105,12 @@
     .gallery-filter { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
     .filter-btn { padding: 8px 22px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: 2px solid var(--saffron); background: transparent; color: var(--saffron); transition: all 0.3s; }
     .filter-btn.active, .filter-btn:hover { background: var(--saffron); color: #fff; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; max-width: 1200px; margin: 0 auto; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 28px; max-width: 1200px; margin: 0 auto; }
     .art-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
     .art-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
     .art-card[data-status="sold"] { opacity: 0.85; }
-
-    /* ── IMAGE FIX: contain so full image shows, dark bg to fill gaps ── */
     .art-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; background: #111; cursor: zoom-in; }
     .art-img img { width: 100%; height: 100%; object-fit: contain; }
-
     .art-badge { position: absolute; top: 14px; right: 14px; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; z-index: 1; }
     .badge-sold { background: var(--deep-red); }
     .badge-new  { background: var(--teal); }
@@ -129,27 +122,33 @@
     .btn-enquire { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 8px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.3s, transform 0.2s; }
     .btn-enquire:hover { opacity: 0.85; transform: scale(1.03); }
 
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,0.93);
-      align-items: center; justify-content: center;
-      padding: 20px;
-      animation: fadeIn 0.2s ease;
-    }
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.93); align-items: center; justify-content: center; padding: 20px; }
     .lightbox.open { display: flex; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .lightbox-inner { position: relative; max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .lightbox-inner img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
     .lightbox-title { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.2rem; text-align: center; }
-    .lightbox-close {
-      position: absolute; top: -16px; right: -16px;
-      background: var(--saffron); color: #fff;
-      border: none; border-radius: 50%; width: 36px; height: 36px;
-      font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: background 0.2s;
-    }
+    .lightbox-close { position: absolute; top: -16px; right: -16px; background: var(--saffron); color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
     .lightbox-close:hover { background: var(--deep-red); }
+
+    /* TEACH SECTION */
+    #teach { background: linear-gradient(135deg, #FFF8F0, #ffecd2); }
+    .teach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .teach-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--dark); margin-bottom: 16px; line-height: 1.3; }
+    .teach-text h2 span { color: var(--saffron); }
+    .teach-text p { color: #5a3e28; line-height: 1.9; font-size: 0.98rem; margin-bottom: 14px; }
+    .teach-highlights { display: flex; flex-direction: column; gap: 10px; margin: 20px 0 28px; }
+    .teach-highlight { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #5a3e28; }
+    .teach-highlight span { font-size: 1.1rem; }
+    .teach-form-box { background: #fff; border-radius: 24px; padding: 36px 32px; box-shadow: 0 8px 40px rgba(0,0,0,0.08); border-top: 4px solid var(--gold); }
+    .teach-form-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .teach-form-box p { font-size: 0.85rem; color: #9a7a5a; margin-bottom: 20px; }
+    .teach-form { display: flex; flex-direction: column; gap: 12px; }
+    .teach-form input, .teach-form select { padding: 13px 18px; border: 2px solid #e8d5c0; border-radius: 12px; font-size: 0.9rem; font-family: 'Poppins', sans-serif; outline: none; transition: border 0.3s; background: #fff; }
+    .teach-form input:focus, .teach-form select:focus { border-color: var(--saffron); }
+    .teach-form button { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: opacity 0.3s; }
+    .teach-form button:hover { opacity: 0.88; }
+    .teach-success { display: none; text-align: center; padding: 20px; color: var(--teal); font-weight: 600; font-size: 1rem; }
 
     /* CONTACT */
     #contact { background: linear-gradient(135deg, var(--purple) 0%, var(--deep-red) 50%, var(--saffron) 100%); text-align: center; }
@@ -161,8 +160,25 @@
     .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,0.5); }
     .contact-note { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 20px; }
 
+    /* SUBSCRIBE MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 8888; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #fff; border-radius: 24px; padding: 44px 40px; max-width: 460px; width: 100%; text-align: center; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: var(--cream); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1rem; cursor: pointer; color: var(--dark); }
+    .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--dark); margin-bottom: 10px; }
+    .modal-box p { color: #7a5a3a; font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; }
+    .subscribe-form { display: flex; flex-direction: column; gap: 12px; }
+    .subscribe-form input { padding: 14px 18px; border: 2px solid #e8d5c0; border-radius: 30px; font-size: 0.92rem; font-family: 'Poppins', sans-serif; outline: none; transition: border 0.3s; }
+    .subscribe-form input:focus { border-color: var(--saffron); }
+    .subscribe-form button { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 14px; border-radius: 30px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+    .subscribe-success { display: none; color: var(--teal); font-weight: 600; font-size: 1rem; padding: 12px; }
+
     /* FOOTER */
-    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 30px 5%; font-size: 0.85rem; border-top: 1px solid rgba(255,184,0,0.2); }
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 40px 5% 30px; font-size: 0.85rem; border-top: 1px solid rgba(255,184,0,0.2); }
+    .footer-social { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+    .footer-social a { color: rgba(255,255,255,0.5); font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.3s; }
+    .footer-social a:hover { color: var(--gold); }
+    .footer-social a svg { width: 16px; height: 16px; fill: currentColor; }
     footer span { color: var(--gold); }
 
     /* FLOATING WA */
@@ -171,32 +187,21 @@
     @keyframes pulse { 0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.5)}50%{box-shadow:0 6px 36px rgba(37,211,102,0.8)} }
 
     /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .teach-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
     @media (max-width: 768px) {
       .nav-links { display: none; flex-direction: column; gap: 16px; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(26,10,0,0.98); padding: 24px 5%; }
       .nav-links.open { display: flex; }
+      .nav-btn { display: none; }
       .hamburger { display: flex; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-image { aspect-ratio: 3/2; font-size: 4rem; }
       .lightbox-inner img { max-height: 70vh; }
+      .modal-box { padding: 32px 24px; }
     }
   </style>
 </head>
 <body>
-
 <script src="config.js"></script>
-
-<nav>
-  <a class="logo" href="#" id="nav-logo">Art</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#trending">Trending</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -207,13 +212,51 @@
   </div>
 </div>
 
+<!-- SUBSCRIBE MODAL -->
+<div class="modal-overlay" id="subscribeModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div style="font-size:2.5rem;margin-bottom:12px">🎨</div>
+    <h3>Stay in the Loop!</h3>
+    <p>Be the first to know when a new artwork drops. No spam — just beautiful art straight to your inbox.</p>
+    <div class="subscribe-form">
+      <input type="text" id="sub-name" placeholder="Your name" />
+      <input type="email" id="sub-email" placeholder="Your email address" />
+      <button onclick="handleSubscribe()">Notify Me of New Art ✨</button>
+    </div>
+    <div class="subscribe-success" id="sub-success">🎉 You're in! We'll let you know when new art is added.</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">Sw<span>e</span>Arts</a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#trending">Trending</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#teach">Learn Art</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <a href="#" id="nav-insta" target="_blank" rel="noopener" class="nav-instagram" title="Follow on Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </li>
+    </ul>
+    <button class="nav-btn" onclick="openModal()">🔔 Subscribe</button>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-deco deco1"></div>
   <div class="hero-deco deco2"></div>
   <div class="hero-content">
     <div class="hero-badge">✦ Authentic Handmade Art ✦</div>
-    <h1 id="hero-title">Loading...</h1>
-    <p id="hero-sub"></p>
+    <h1><span>Where</span> Tradition<br/>Meets Beauty</h1>
+    <p>Each piece is a journey through India's rich artistic heritage — handcrafted with love, patience, and generations of mastery.</p>
     <div class="hero-btns">
       <a href="#gallery" class="btn btn-primary">🎨 Explore Gallery</a>
       <a href="#contact" class="btn btn-outline">💬 Chat on WhatsApp</a>
@@ -221,25 +264,89 @@
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <div class="about-grid">
-    <div class="about-image-wrap">
-      <div class="about-image" id="about-img-wrap">🎨</div>
+  <div class="section-header">
+    <div class="section-label">✦ The Story Behind the Art</div>
+    <h2 class="section-title">Meet <span>Swetha</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-intro">
+    <p>Hi, I'm Swetha — and I make things with my hands, my heart, and a whole lot of patience. 🌸</p>
+    <p>I grew up surrounded by the colors and rhythms of Indian tradition, and somewhere along the way I fell deeply in love with turning raw materials into something that makes a home feel more alive. For me, art isn't just something you hang on a wall — it's a feeling, a memory, a piece of culture you get to carry with you every day.</p>
+    <p>I specialize in <strong>Lippan Art</strong> — an ancient folk art from Gujarat where clay and mirrors come together to create stunning textured pieces — along with <strong>Yarn Art</strong> and Madhubani-inspired designs. Every single piece is completely handmade, from the first sketch to the final mirror, just for you.</p>
+    <div class="about-stats">
+      <div class="stat"><div class="stat-num" id="stat-sold"></div><div class="stat-label">Artworks Sold</div></div>
+      <div class="stat"><div class="stat-num" id="stat-styles"></div><div class="stat-label">Art Styles</div></div>
     </div>
-    <div class="about-content">
-      <div class="section-label">✦ About the Artist</div>
-      <h2 id="about-title"></h2>
-      <p id="about-bio1"></p>
-      <p id="about-bio2"></p>
-      <div class="about-stats">
-        <div class="stat"><div class="stat-num" id="stat-sold"></div><div class="stat-label">Artworks Sold</div></div>
-        <div class="stat"><div class="stat-num" id="stat-styles"></div><div class="stat-label">Art Styles</div></div>
+  </div>
+
+  <!-- PROCESS PHOTO SCROLL -->
+  <div class="process-section">
+    <p class="process-section-title">A peek into how every piece comes to <span>life</span> ✨</p>
+    <div class="process-scroll-wrap">
+      <div class="process-scroll" id="process-scroll">
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#8B4513,#D2691E)">
+            <div class="process-step-num">Step 1</div>
+            <img src="images/process1.jpg" alt="Gathering materials" onerror="this.style.display='none'" />
+            🧱
+          </div>
+          <h4>Gathering Materials</h4>
+          <p>Selecting the finest clay, mirrors & pigments</p>
+        </div>
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#2C3E50,#4A6741)">
+            <div class="process-step-num">Step 2</div>
+            <img src="images/process2.jpg" alt="Sketching design" onerror="this.style.display='none'" />
+            ✏️
+          </div>
+          <h4>Sketching the Design</h4>
+          <p>Every motif starts as a hand-drawn blueprint</p>
+        </div>
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#FF6B00,#FFB800)">
+            <div class="process-step-num">Step 3</div>
+            <img src="images/process3.jpg" alt="Placing clay" onerror="this.style.display='none'" />
+            🤲
+          </div>
+          <h4>Placing the Clay</h4>
+          <p>Raised outlines shaped petal by petal, by hand</p>
+        </div>
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#1A237E,#283593)">
+            <div class="process-step-num">Step 4</div>
+            <img src="images/process4.jpg" alt="Setting mirrors" onerror="this.style.display='none'" />
+            🪞
+          </div>
+          <h4>Setting the Mirrors</h4>
+          <p>Each mirror pressed in with care to catch the light</p>
+        </div>
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#6A0572,#C0392B)">
+            <div class="process-step-num">Step 5</div>
+            <img src="images/process5.jpg" alt="Painting" onerror="this.style.display='none'" />
+            🎨
+          </div>
+          <h4>Painting & Finishing</h4>
+          <p>Rich colors, final details & sealed with love</p>
+        </div>
+        <div class="process-item">
+          <div class="process-photo" style="background:linear-gradient(135deg,#00897B,#1B5E20)">
+            <div class="process-step-num">Final</div>
+            <img src="images/process6.jpg" alt="Finished artwork" onerror="this.style.display='none'" />
+            ✨
+          </div>
+          <h4>Ready for Your Home</h4>
+          <p>A one-of-a-kind piece made just for you</p>
+        </div>
       </div>
-      <a href="#contact" class="btn btn-primary">Get in Touch 🌸</a>
     </div>
+    <p class="scroll-hint">← swipe to see the journey →</p>
   </div>
 </section>
 
+<!-- TRENDING -->
 <section id="trending">
   <div class="section-header">
     <div class="section-label">✦ What's Hot Right Now</div>
@@ -249,6 +356,7 @@
   <div class="trending-grid" id="trending-grid"></div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery">
   <div class="section-header">
     <div class="section-label">✦ Shop Original Art</div>
@@ -259,27 +367,81 @@
   <div class="gallery-grid" id="gallery-grid"></div>
 </section>
 
+<!-- LEARN ART / TEACH -->
+<section id="teach">
+  <div class="section-header">
+    <div class="section-label">✦ Keep Tradition Alive</div>
+    <h2 class="section-title">Learn <span>Traditional Art</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="teach-grid">
+    <div class="teach-text">
+      <h2>I love teaching, and I'd love to <span>teach you</span> 🌸</h2>
+      <p>There's something magical about watching someone create their very first piece of Lippan art — the moment the mirrors go in and it all comes together. I've been dreaming of sharing that magic more widely.</p>
+      <p>I plan to offer art classes for kids and anyone who wants to learn — because these traditions deserve to live on, and the best way to keep them alive is to pass them on with joy and love.</p>
+      <div class="teach-highlights">
+        <div class="teach-highlight"><span>🧒</span> Classes for kids & adults</div>
+        <div class="teach-highlight"><span>🪷</span> Lippan Art, Yarn Art & more</div>
+        <div class="teach-highlight"><span>🏠</span> Small groups, personal attention</div>
+        <div class="teach-highlight"><span>🌍</span> In-person & online options planned</div>
+      </div>
+      <p style="font-style:italic;color:#9a7a5a;font-size:0.9rem;">If this sounds like something you'd love — leave your details and you'll be the first to know when classes open!</p>
+    </div>
+    <div class="teach-form-box">
+      <h3>I'm Interested! 🙋</h3>
+      <p>Sign up to be notified when art classes are available. We'll reach out to you first.</p>
+      <div class="teach-form" id="teach-form">
+        <input type="text" id="teach-name" placeholder="Your full name *" />
+        <input type="email" id="teach-email" placeholder="Your email address *" />
+        <input type="tel" id="teach-phone" placeholder="Your phone number" />
+        <select id="teach-interest">
+          <option value="">I'm interested in... *</option>
+          <option value="kids">Classes for my child</option>
+          <option value="adult">Classes for myself (adult)</option>
+          <option value="both">Both kids & adult classes</option>
+          <option value="online">Online classes</option>
+          <option value="inperson">In-person classes</option>
+        </select>
+        <button onclick="handleTeachSignup()">Count Me In! 🎨</button>
+      </div>
+      <div class="teach-success" id="teach-success">
+        🌸 Wonderful! We've got your details and will reach out as soon as classes are ready. Thank you for keeping tradition alive!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-header">
     <div class="section-label">✦ Let's Connect</div>
     <h2 class="section-title">Interested in a Piece?</h2>
     <div class="section-line"></div>
   </div>
-  <p class="contact-sub">Whether you'd like to buy, commission a custom artwork, or simply know more — I'd love to hear from you! Reach out directly on WhatsApp for the fastest response.</p>
+  <p class="contact-sub">Whether you'd like to buy, commission a custom artwork, or simply know more — reach out directly on WhatsApp for the fastest response.</p>
   <a id="wa-main-btn" href="#" class="whatsapp-btn" target="_blank" rel="noopener">
-    <span style="font-size:1.5rem;">💬</span> Chat on WhatsApp
+    <span style="font-size:1.5rem">💬</span> Chat on WhatsApp
   </a>
   <p class="contact-note">Tap to open WhatsApp · Replies within a few hours</p>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2025 <span id="footer-name"></span> · All Rights Reserved · Handcrafted with ❤️</p>
+  <div class="footer-social">
+    <a href="#" id="footer-insta" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </a>
+    <a href="#" id="footer-email">✉️ Email Us</a>
+    <a href="#" onclick="openModal(); return false;">🔔 Subscribe</a>
+  </div>
+  <p>© 2025 <span>SweArts LLC</span> · All Rights Reserved · Handcrafted with ❤️</p>
 </footer>
 
 <a class="float-wa" id="wa-float-btn" href="#" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
 
 <script>
-// ── Lightbox ──────────────────────────────────────────────────
+// ── Lightbox ──────────────────────────────────────────────
 function openLightbox(src, title) {
   document.getElementById("lightbox-img").src = src;
   document.getElementById("lightbox-title").textContent = title;
@@ -291,66 +453,105 @@ function closeLightbox(e) {
   document.getElementById("lightbox").classList.remove("open");
   document.body.style.overflow = "";
 }
-document.addEventListener("keydown", e => { if (e.key === "Escape") { document.getElementById("lightbox").classList.remove("open"); document.body.style.overflow = ""; } });
 
-// ── Helpers ──────────────────────────────────────────────────
-function waLink(number, msg) {
-  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
+// ── Subscribe Modal ───────────────────────────────────────
+function openModal() {
+  document.getElementById("subscribeModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById("subscribeModal") && !e.target.classList.contains("modal-close")) return;
+  document.getElementById("subscribeModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function handleSubscribe() {
+  const email = document.getElementById("sub-email").value;
+  const name  = document.getElementById("sub-name").value;
+  if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, type: "Newsletter Subscriber" })
+  }).finally(() => {
+    document.querySelector(".subscribe-form").style.display = "none";
+    document.getElementById("sub-success").style.display = "block";
+  });
+}
+  const email = document.getElementById("sub-email").value;
+  const name  = document.getElementById("sub-name").value;
+  if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
+  fetch("https://formspree.io/f/YOUR_SUBSCRIBE_FORM_ID", {
+    method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({ name, email, type: "Newsletter Subscriber", _subject: "New SweArts Subscriber!" })
+  }).finally(() => {
+    document.querySelector(".subscribe-form").style.display = "none";
+    document.getElementById("sub-success").style.display = "block";
+  });
 }
 
-// ── Populate from config ─────────────────────────────────────
+// ── Art Class Signup ──────────────────────────────────────
+function handleTeachSignup() {
+  const name     = document.getElementById("teach-name").value;
+  const email    = document.getElementById("teach-email").value;
+  const phone    = document.getElementById("teach-phone").value;
+  const interest = document.getElementById("teach-interest").value;
+  if (!name || !email || !interest) { alert("Please fill in your name, email and interest."); return; }
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, phone, interest, type: "Art Class Interest" })
+  }).finally(() => {
+    document.getElementById("teach-form").style.display = "none";
+    document.getElementById("teach-success").style.display = "block";
+  });
+}
+
+// ── Helpers ───────────────────────────────────────────────
+function waLink(number, msg) {
+  return `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(msg)}`;
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    ["lightbox","subscribeModal"].forEach(id => document.getElementById(id).classList.remove("open"));
+    document.body.style.overflow = "";
+  }
+});
+
+// ── Populate from config ──────────────────────────────────
 document.addEventListener("DOMContentLoaded", function () {
   const c = SITE_CONFIG;
   const wa = c.artist.whatsapp;
 
-  // Page title & nav
-  document.getElementById("page-title").textContent = c.artist.name + " – Handmade Traditional Art";
-  document.getElementById("nav-logo").innerHTML = c.artist.name.split(" ")[0] + " <span>" + (c.artist.name.split(" ")[1] || "") + "</span>";
-
-  // Hero
-  document.getElementById("hero-title").innerHTML = `<span>${c.artist.tagline.split(" ").slice(0,1).join(" ")}</span> ${c.artist.tagline.split(" ").slice(1).join(" ")}`;
-  document.getElementById("hero-sub").textContent = "Each piece is a journey through India's rich artistic heritage — handcrafted with love, passion, and generations of mastery.";
-
-  // About
-  const imgWrap = document.getElementById("about-img-wrap");
-  if (c.artist.photo) {
-    imgWrap.innerHTML = `<img src="${c.artist.photo}" alt="${c.artist.name}" onerror="this.parentElement.innerHTML='🎨'" style="width:100%;height:100%;object-fit:cover;" />`;
-  }
-  document.getElementById("about-title").textContent = c.artist.name + " — A Storyteller in Colors";
-  document.getElementById("about-bio1").textContent = c.artist.bio_line1;
-  document.getElementById("about-bio2").textContent = c.artist.bio_line2;
   document.getElementById("stat-sold").textContent   = c.artist.artworks_sold;
   document.getElementById("stat-styles").textContent = c.artist.art_styles;
+  document.getElementById("nav-insta").href    = c.artist.instagram || "#";
+  document.getElementById("footer-insta").href = c.artist.instagram || "#";
+  document.getElementById("footer-email").href = c.artist.gmail ? `mailto:${c.artist.gmail}` : "#";
 
-  // WhatsApp buttons
-  const waMsg = `Hi ${c.artist.name}! I visited your website and I'm interested in your artwork.`;
+  const waMsg = `Hi SweArts! I visited your website and I'm interested in your artwork.`;
   document.getElementById("wa-main-btn").href  = waLink(wa, waMsg);
   document.getElementById("wa-float-btn").href = waLink(wa, waMsg);
 
-  // Footer
-  document.getElementById("footer-name").textContent = c.artist.name + " Arts";
-
-  // ── Trending ──
+  // Trending
   const tGrid = document.getElementById("trending-grid");
   c.trending.forEach(item => {
     const card = document.createElement("div");
     card.className = "trending-card";
     card.innerHTML = `
       <div class="trending-img" style="background:${item.gradient}">
-        ${item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.outerHTML='<span style=font-size:5rem>${item.emoji}</span>'" />` : `<span style="font-size:5rem">${item.emoji}</span>`}
+        ${item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'" />` : `<span style="font-size:5rem">${item.emoji}</span>`}
       </div>
       <div class="trending-info">
         <h3>${item.title}</h3>
         <p>${item.description}</p>
         <span class="trending-tag">${item.tag}</span>
       </div>`;
-    if (item.image) {
-      card.querySelector(".trending-img").addEventListener("click", () => openLightbox(item.image, item.title));
-    }
+    if (item.image) card.querySelector(".trending-img").addEventListener("click", () => openLightbox(item.image, item.title));
     tGrid.appendChild(card);
   });
 
-  // ── Gallery filter buttons ──
+  // Gallery filter
   const categories = ["All", ...new Set(c.gallery.map(a => a.category))];
   const fContainer = document.getElementById("gallery-filter");
   categories.forEach((cat, i) => {
@@ -365,17 +566,14 @@ document.addEventListener("DOMContentLoaded", function () {
     fContainer.appendChild(btn);
   });
 
-  // ── Gallery cards ──
+  // Gallery cards — WhatsApp message has NO price, just product details
   const gGrid = document.getElementById("gallery-grid");
   c.gallery.forEach(art => {
     const enquireMsg = art.status === "sold"
-      ? `Hi! Do you have similar pieces to "${art.title}"?`
-      : `Hi! I'm interested in "${art.title}" (${art.price}).`;
-    const badgeHTML = art.status === "sold"
-      ? `<span class="art-badge badge-sold">Sold</span>`
-      : art.status === "new"
-      ? `<span class="art-badge badge-new">New</span>`
-      : "";
+      ? `Hi SweArts! I saw "${art.title}" on your website. Do you have similar pieces available?`
+      : `Hi SweArts! I saw "${art.title}" on your website (${art.type}). I'd love to know more about it!`;
+    const badgeHTML = art.status === "sold" ? `<span class="art-badge badge-sold">Sold</span>`
+      : art.status === "new" ? `<span class="art-badge badge-new">New</span>` : "";
     const btnLabel = art.status === "sold" ? "Similar?" : "Enquire";
 
     const card = document.createElement("div");
@@ -385,7 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
     card.innerHTML = `
       <div class="art-img" style="background:${art.gradient}">
         ${badgeHTML}
-        ${art.image ? `<img src="${art.image}" alt="${art.title}" onerror="this.outerHTML='<span style=font-size:5rem>${art.emoji}</span>'" />` : `<span style="font-size:5rem">${art.emoji}</span>`}
+        ${art.image ? `<img src="${art.image}" alt="${art.title}" onerror="this.style.display='none'" />` : `<span style="font-size:5rem">${art.emoji}</span>`}
       </div>
       <div class="art-info">
         <h3>${art.title}</h3>
@@ -395,16 +593,10 @@ document.addEventListener("DOMContentLoaded", function () {
           <a href="${waLink(wa, enquireMsg)}" class="btn-enquire" target="_blank">${btnLabel}</a>
         </div>
       </div>`;
-
-    // Lightbox on image click
-    if (art.image) {
-      card.querySelector(".art-img").addEventListener("click", () => openLightbox(art.image, art.title));
-    }
-
+    if (art.image) card.querySelector(".art-img").addEventListener("click", () => openLightbox(art.image, art.title));
     gGrid.appendChild(card);
   });
 
-  // ── Filter logic ──
   function filterGallery(cat) {
     document.querySelectorAll(".art-card").forEach(card => {
       card.style.display = (cat === "All" || card.dataset.category === cat) ? "block" : "none";
@@ -412,15 +604,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Nav
-function toggleNav() {
-  document.getElementById("navLinks").classList.toggle("open");
-}
+function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
 document.addEventListener("click", e => {
   if (!e.target.closest("nav")) document.getElementById("navLinks").classList.remove("open");
 });
-
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", function(e) {
     const t = document.querySelector(this.getAttribute("href"));
@@ -428,5 +615,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+
 </body>
 </html>
