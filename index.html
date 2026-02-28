@@ -391,10 +391,10 @@
     <div class="teach-form-box">
       <h3>I'm Interested! 🙋</h3>
       <p>Sign up to be notified when art classes are available. We'll reach out to you first.</p>
-            <div id="teach-form">
+      <div class="teach-form" id="teach-form">
         <input type="text" id="teach-name" placeholder="Your full name *" />
         <input type="email" id="teach-email" placeholder="Your email address *" />
-        <input type="tel" id="teach-phone" placeholder="Your phone number" />
+        <input type="tel" id="teach-phone" placeholder="Your phone number (optional)" />
         <select id="teach-interest">
           <option value="">I'm interested in... *</option>
           <option value="kids">Classes for my child</option>
@@ -403,7 +403,7 @@
           <option value="online">Online classes</option>
           <option value="inperson">In-person classes</option>
         </select>
-        <button class="teach-submit-btn" onclick="handleTeachSignup()">Count Me In! 🎨</button>
+        <button onclick="handleTeachSignup()">Count Me In! 🎨</button>
       </div>
       <div class="teach-success" id="teach-success">
         🌸 Wonderful! We've got your details and will reach out as soon as classes are ready. Thank you for keeping tradition alive!
@@ -455,7 +455,7 @@ function closeLightbox(e) {
   document.body.style.overflow = "";
 }
 
-// ── Subscribe Modal ───────────────────────────────────────
+// ── Subscribe Modal ──────────────────────────────────────
 function openModal() {
   document.getElementById("subscribeModal").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -465,166 +465,162 @@ function closeModal(e) {
   document.getElementById("subscribeModal").classList.remove("open");
   document.body.style.overflow = "";
 }
+
+// ── Subscribe Form ───────────────────────────────────────
 function handleSubscribe() {
-  const email = document.getElementById("sub-email").value;
-  const name  = document.getElementById("sub-name").value;
+  var email = (document.getElementById("sub-email").value || "").trim();
+  var name  = (document.getElementById("sub-name").value || "").trim();
   if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
-  // Use no-cors mode to avoid CORS issues with Google Apps Script
-  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, type: "Newsletter Subscriber" })
-  }).then(() => {
-    document.querySelector(".subscribe-form").style.display = "none";
-    document.getElementById("sub-success").style.display = "block";
-  }).catch(() => {
-    document.querySelector(".subscribe-form").style.display = "none";
-    document.getElementById("sub-success").style.display = "block";
-  });
-}
-  const email = document.getElementById("sub-email").value;
-  const name  = document.getElementById("sub-name").value;
-  if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
-  fetch("https://formspree.io/f/YOUR_SUBSCRIBE_FORM_ID", {
-    method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
-    body: JSON.stringify({ name, email, type: "Newsletter Subscriber", _subject: "New SweArts Subscriber!" })
-  }).finally(() => {
-    document.querySelector(".subscribe-form").style.display = "none";
-    document.getElementById("sub-success").style.display = "block";
-  });
+  document.querySelector(".subscribe-form").style.display = "none";
+  document.getElementById("sub-success").style.display = "block";
+  var formData = new URLSearchParams();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("type", "Newsletter Subscriber");
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: formData });
 }
 
-// ── Art Class Signup ──────────────────────────────────────
+// ── Art Class Signup ─────────────────────────────────────
 function handleTeachSignup() {
-  const name     = (document.getElementById("teach-name").value || "").trim();
-  const email    = (document.getElementById("teach-email").value || "").trim();
-  const phone    = (document.getElementById("teach-phone").value || "").trim();
-  const interest = document.getElementById("teach-interest").value;
-
-  // Validate
-  if (!name) { document.getElementById("teach-name").focus(); alert("Please enter your name."); return; }
-  if (!email || !email.includes("@")) { document.getElementById("teach-email").focus(); alert("Please enter a valid email."); return; }
-  if (!interest) { document.getElementById("teach-interest").focus(); alert("Please select your interest."); return; }
-
-  // Show success immediately — data still sends in background
+  var name     = (document.getElementById("teach-name").value || "").trim();
+  var email    = (document.getElementById("teach-email").value || "").trim();
+  var phone    = (document.getElementById("teach-phone").value || "").trim();
+  var interest = document.getElementById("teach-interest").value;
+  if (!name)    { alert("Please enter your name."); return; }
+  if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
+  if (!interest){ alert("Please select what you are interested in."); return; }
   document.getElementById("teach-form").style.display = "none";
   document.getElementById("teach-success").style.display = "block";
-
-  // Send to Google Sheets in background
-  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, phone, interest, type: "Art Class Interest" })
-  });
+  var formData = new URLSearchParams();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("interest", interest);
+  formData.append("type", "Art Class Interest");
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: formData });
 }
 
-// ── Helpers ───────────────────────────────────────────────
+// ── WhatsApp link helper ─────────────────────────────────
 function waLink(number, msg) {
-  return `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(msg)}`;
+  return "https://api.whatsapp.com/send?phone=" + number + "&text=" + encodeURIComponent(msg);
 }
 
-document.addEventListener("keydown", e => {
+// ── Escape key closes overlays ───────────────────────────
+document.addEventListener("keydown", function(e) {
   if (e.key === "Escape") {
-    ["lightbox","subscribeModal"].forEach(id => document.getElementById(id).classList.remove("open"));
+    document.getElementById("lightbox").classList.remove("open");
+    document.getElementById("subscribeModal").classList.remove("open");
     document.body.style.overflow = "";
   }
 });
 
-// ── Populate from config ──────────────────────────────────
-document.addEventListener("DOMContentLoaded", function () {
-  const c = SITE_CONFIG;
-  const wa = c.artist.whatsapp;
+// ── Populate from config ─────────────────────────────────
+document.addEventListener("DOMContentLoaded", function() {
+  var c  = SITE_CONFIG;
+  var wa = c.artist.whatsapp;
 
   document.getElementById("stat-sold").textContent   = c.artist.artworks_sold;
   document.getElementById("stat-styles").textContent = c.artist.art_styles;
   document.getElementById("nav-insta").href    = c.artist.instagram || "#";
   document.getElementById("footer-insta").href = c.artist.instagram || "#";
-  document.getElementById("footer-email").href = c.artist.gmail ? `mailto:${c.artist.gmail}` : "#";
+  document.getElementById("footer-email").href = c.artist.gmail ? "mailto:" + c.artist.gmail : "#";
 
-  const waMsg = `Hi SweArts! I visited your website and I'm interested in your artwork.`;
+  var waMsg = "Hi SweArts! I visited your website and I'm interested in your artwork.";
   document.getElementById("wa-main-btn").href  = waLink(wa, waMsg);
   document.getElementById("wa-float-btn").href = waLink(wa, waMsg);
 
-  // Trending
-  const tGrid = document.getElementById("trending-grid");
-  c.trending.forEach(item => {
-    const card = document.createElement("div");
+  // ── Trending ──
+  var tGrid = document.getElementById("trending-grid");
+  c.trending.forEach(function(item) {
+    var card = document.createElement("div");
     card.className = "trending-card";
-    card.innerHTML = `
-      <div class="trending-img" style="background:${item.gradient}">
-        ${item.image ? `<img src="${item.image}" alt="${item.title}" onerror="this.style.display='none'" />` : `<span style="font-size:5rem">${item.emoji}</span>`}
-      </div>
-      <div class="trending-info">
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-        <span class="trending-tag">${item.tag}</span>
-      </div>`;
-    if (item.image) card.querySelector(".trending-img").addEventListener("click", () => openLightbox(item.image, item.title));
+    var imgHTML = item.image
+      ? '<img src="' + item.image + '" alt="' + item.title + '" style="width:100%;height:100%;object-fit:contain;" onerror="this.outerHTML=\'<span style=\"font-size:4rem\">' + item.emoji + '</span>\'" />'
+      : '<span style="font-size:5rem">' + item.emoji + '</span>';
+    card.innerHTML =
+      '<div class="trending-img" style="background:' + item.gradient + '">' + imgHTML + '</div>' +
+      '<div class="trending-info">' +
+        '<h3>' + item.title + '</h3>' +
+        '<p>' + item.description + '</p>' +
+        '<span class="trending-tag">' + item.tag + '</span>' +
+      '</div>';
+    if (item.image) {
+      card.querySelector(".trending-img").addEventListener("click", function() {
+        openLightbox(item.image, item.title);
+      });
+    }
     tGrid.appendChild(card);
   });
 
-  // Gallery filter
-  const categories = ["All", ...new Set(c.gallery.map(a => a.category))];
-  const fContainer = document.getElementById("gallery-filter");
-  categories.forEach((cat, i) => {
-    const btn = document.createElement("button");
+  // ── Gallery filter ──
+  var categories = ["All"].concat([...new Set(c.gallery.map(function(a) { return a.category; }))]);
+  var fContainer = document.getElementById("gallery-filter");
+  categories.forEach(function(cat, i) {
+    var btn = document.createElement("button");
     btn.className = "filter-btn" + (i === 0 ? " active" : "");
     btn.textContent = cat;
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
       btn.classList.add("active");
       filterGallery(cat);
     });
     fContainer.appendChild(btn);
   });
 
-  // Gallery cards — WhatsApp message has NO price, just product details
-  const gGrid = document.getElementById("gallery-grid");
-  c.gallery.forEach(art => {
-    const enquireMsg = art.status === "sold"
-      ? `Hi SweArts! I saw "${art.title}" on your website. Do you have similar pieces available?`
-      : `Hi SweArts! I saw "${art.title}" on your website (${art.type}). I'd love to know more about it!`;
-    const badgeHTML = art.status === "sold" ? `<span class="art-badge badge-sold">Sold</span>`
-      : art.status === "new" ? `<span class="art-badge badge-new">New</span>` : "";
-    const btnLabel = art.status === "sold" ? "Similar?" : "Enquire";
-
-    const card = document.createElement("div");
+  // ── Gallery cards ──
+  var gGrid = document.getElementById("gallery-grid");
+  c.gallery.forEach(function(art) {
+    var enquireMsg = art.status === "sold"
+      ? 'Hi SweArts! I saw "' + art.title + '" on your website. Do you have similar pieces available?'
+      : 'Hi SweArts! I saw "' + art.title + '" on your website (' + art.type + '). I\'d love to know more!';
+    var badgeHTML = art.status === "sold"
+      ? '<span class="art-badge badge-sold">Sold</span>'
+      : art.status === "new" ? '<span class="art-badge badge-new">New</span>' : "";
+    var btnLabel = art.status === "sold" ? "Similar?" : "Enquire";
+    var imgHTML = art.image
+      ? '<img src="' + art.image + '" alt="' + art.title + '" style="width:100%;height:100%;object-fit:contain;" onerror="this.outerHTML=\'<span style=\"font-size:4rem\">' + art.emoji + '</span>\'" />'
+      : '<span style="font-size:5rem">' + art.emoji + '</span>';
+    var card = document.createElement("div");
     card.className = "art-card";
     card.dataset.category = art.category;
     card.dataset.status = art.status;
-    card.innerHTML = `
-      <div class="art-img" style="background:${art.gradient}">
-        ${badgeHTML}
-        ${art.image ? `<img src="${art.image}" alt="${art.title}" onerror="this.style.display='none'" />` : `<span style="font-size:5rem">${art.emoji}</span>`}
-      </div>
-      <div class="art-info">
-        <h3>${art.title}</h3>
-        <div class="art-type">${art.type}</div>
-        <div class="art-footer">
-          <div class="art-price">${art.price}</div>
-          <a href="${waLink(wa, enquireMsg)}" class="btn-enquire" target="_blank">${btnLabel}</a>
-        </div>
-      </div>`;
-    if (art.image) card.querySelector(".art-img").addEventListener("click", () => openLightbox(art.image, art.title));
+    card.innerHTML =
+      '<div class="art-img" style="background:' + art.gradient + '">' +
+        badgeHTML + imgHTML +
+      '</div>' +
+      '<div class="art-info">' +
+        '<h3>' + art.title + '</h3>' +
+        '<div class="art-type">' + art.type + '</div>' +
+        '<div class="art-footer">' +
+          '<div class="art-price">' + art.price + '</div>' +
+          '<a href="' + waLink(wa, enquireMsg) + '" class="btn-enquire" target="_blank">' + btnLabel + '</a>' +
+        '</div>' +
+      '</div>';
+    if (art.image) {
+      card.querySelector(".art-img").addEventListener("click", function() {
+        openLightbox(art.image, art.title);
+      });
+    }
     gGrid.appendChild(card);
   });
 
   function filterGallery(cat) {
-    document.querySelectorAll(".art-card").forEach(card => {
+    document.querySelectorAll(".art-card").forEach(function(card) {
       card.style.display = (cat === "All" || card.dataset.category === cat) ? "block" : "none";
     });
   }
 });
 
+// ── Nav ──────────────────────────────────────────────────
 function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
-document.addEventListener("click", e => {
+document.addEventListener("click", function(e) {
   if (!e.target.closest("nav")) document.getElementById("navLinks").classList.remove("open");
 });
-document.querySelectorAll('a[href^="#"]').forEach(a => {
+
+// ── Smooth scroll ────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener("click", function(e) {
-    const t = document.querySelector(this.getAttribute("href"));
+    var t = document.querySelector(this.getAttribute("href"));
     if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 70, behavior: "smooth" }); }
   });
 });
