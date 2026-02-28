@@ -146,7 +146,8 @@
     .teach-form { display: flex; flex-direction: column; gap: 12px; }
     .teach-form input, .teach-form select { padding: 13px 18px; border: 2px solid #e8d5c0; border-radius: 12px; font-size: 0.9rem; font-family: 'Poppins', sans-serif; outline: none; transition: border 0.3s; background: #fff; }
     .teach-form input:focus, .teach-form select:focus { border-color: var(--saffron); }
-    .teach-form button { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: opacity 0.3s; }
+    .teach-form button, .teach-submit-btn { background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 14px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: opacity 0.3s; width: 100%; margin-top: 4px; }
+    .teach-form button:hover, .teach-submit-btn:hover { opacity: 0.88; }
     .teach-form button:hover { opacity: 0.88; }
     .teach-success { display: none; text-align: center; padding: 20px; color: var(--teal); font-weight: 600; font-size: 1rem; }
 
@@ -390,7 +391,7 @@
     <div class="teach-form-box">
       <h3>I'm Interested! 🙋</h3>
       <p>Sign up to be notified when art classes are available. We'll reach out to you first.</p>
-      <div class="teach-form" id="teach-form">
+            <div id="teach-form">
         <input type="text" id="teach-name" placeholder="Your full name *" />
         <input type="email" id="teach-email" placeholder="Your email address *" />
         <input type="tel" id="teach-phone" placeholder="Your phone number" />
@@ -398,11 +399,11 @@
           <option value="">I'm interested in... *</option>
           <option value="kids">Classes for my child</option>
           <option value="adult">Classes for myself (adult)</option>
-          <option value="both">Both kids & adult classes</option>
+          <option value="both">Both kids &amp; adult classes</option>
           <option value="online">Online classes</option>
           <option value="inperson">In-person classes</option>
         </select>
-        <button onclick="handleTeachSignup()">Count Me In! 🎨</button>
+        <button class="teach-submit-btn" onclick="handleTeachSignup()">Count Me In! 🎨</button>
       </div>
       <div class="teach-success" id="teach-success">
         🌸 Wonderful! We've got your details and will reach out as soon as classes are ready. Thank you for keeping tradition alive!
@@ -496,22 +497,26 @@ function handleSubscribe() {
 
 // ── Art Class Signup ──────────────────────────────────────
 function handleTeachSignup() {
-  const name     = document.getElementById("teach-name").value;
-  const email    = document.getElementById("teach-email").value;
-  const phone    = document.getElementById("teach-phone").value;
+  const name     = (document.getElementById("teach-name").value || "").trim();
+  const email    = (document.getElementById("teach-email").value || "").trim();
+  const phone    = (document.getElementById("teach-phone").value || "").trim();
   const interest = document.getElementById("teach-interest").value;
-  if (!name || !email || !interest) { alert("Please fill in your name, email and interest."); return; }
+
+  // Validate
+  if (!name) { document.getElementById("teach-name").focus(); alert("Please enter your name."); return; }
+  if (!email || !email.includes("@")) { document.getElementById("teach-email").focus(); alert("Please enter a valid email."); return; }
+  if (!interest) { document.getElementById("teach-interest").focus(); alert("Please select your interest."); return; }
+
+  // Show success immediately — data still sends in background
+  document.getElementById("teach-form").style.display = "none";
+  document.getElementById("teach-success").style.display = "block";
+
+  // Send to Google Sheets in background
   fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
     method: "POST",
     mode: "no-cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, phone, interest, type: "Art Class Interest" })
-  }).then(() => {
-    document.getElementById("teach-form").style.display = "none";
-    document.getElementById("teach-success").style.display = "block";
-  }).catch(() => {
-    document.getElementById("teach-form").style.display = "none";
-    document.getElementById("teach-success").style.display = "block";
   });
 }
 
