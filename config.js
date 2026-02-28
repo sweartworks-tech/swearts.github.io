@@ -14,10 +14,10 @@ const SITE_CONFIG = {
     bio_line2: "Driven by the belief that traditional art should continue to live, evolve, and inspire, Swetha's work brings warmth, culture, and meaning into the spaces it touches. Whether through intricate mirror-work, vibrant folk patterns, or tactile yarn designs, she aims to make every piece a reminder of heritage, beauty, and the joy of creating with one's hands.",
     artworks_sold: "50+",
     art_styles: "10+",
-    whatsapp: "919472758363",        // ← Replace with your US number e.g. 14155551234
+    whatsapp: "19472758363",        // ← Replace with your US number e.g. 14155551234
     photo: "",
-    instagram: "https://www.instagram.com/YOUR_HANDLE",  // ← Replace with your Instagram URL
-    gmail: "your@gmail.com",                              // ← Replace with your Gmail
+    instagram: "https://www.instagram.com/swe_artss?igsh=MXBoeXFzZ2R0N3FxdA==",  // ← Replace with your Instagram URL
+    gmail: "sweartworks@gmail.com",                              // ← Replace with your Gmail
   },
 
   // ── TRENDING ARTWORKS (shown in the dark section) ────────
