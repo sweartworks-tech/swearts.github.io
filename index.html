@@ -468,11 +468,16 @@ function handleSubscribe() {
   const email = document.getElementById("sub-email").value;
   const name  = document.getElementById("sub-name").value;
   if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
+  // Use no-cors mode to avoid CORS issues with Google Apps Script
   fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
     method: "POST",
+    mode: "no-cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, type: "Newsletter Subscriber" })
-  }).finally(() => {
+  }).then(() => {
+    document.querySelector(".subscribe-form").style.display = "none";
+    document.getElementById("sub-success").style.display = "block";
+  }).catch(() => {
     document.querySelector(".subscribe-form").style.display = "none";
     document.getElementById("sub-success").style.display = "block";
   });
@@ -498,9 +503,13 @@ function handleTeachSignup() {
   if (!name || !email || !interest) { alert("Please fill in your name, email and interest."); return; }
   fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", {
     method: "POST",
+    mode: "no-cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, phone, interest, type: "Art Class Interest" })
-  }).finally(() => {
+  }).then(() => {
+    document.getElementById("teach-form").style.display = "none";
+    document.getElementById("teach-success").style.display = "block";
+  }).catch(() => {
     document.getElementById("teach-form").style.display = "none";
     document.getElementById("teach-success").style.display = "block";
   });
