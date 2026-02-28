@@ -41,8 +41,8 @@ const SITE_CONFIG = {
     {
       emoji: "🪬",
       image: "Images/018.jpg",
-      title: "Rainbow Chakra Lippan Art ",
-      description: "A vibrant explosion of color — red, orange, teal and cobalt layers bloom outward, richly adorned with mirror work that catches every ray of light..",
+      title: "Royal Elephant Lippan Art",
+      description: "A majestic white elephant adorned in festive jewellery and a richly decorated royal blanket, hand-sculpted on a vibrant red canvas with golden mirror dots — a symbol of strength, luck and celebration.",
       tag: "💎 Premium",
       gradient: "linear-gradient(135deg, #1B5E20, #F9A825)",
     },
