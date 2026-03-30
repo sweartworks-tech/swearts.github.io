@@ -37,10 +37,48 @@
 
     /* HERO */
     .hero { min-height: 100vh; background: linear-gradient(135deg, #1A0A00 0%, #3D0C02 40%, #6A0572 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23FFB800' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-    .hero-deco { position: absolute; border-radius: 50%; opacity: 0.1; }
-    .deco1 { width: 400px; height: 400px; background: var(--gold); top: -100px; right: -100px; }
-    .deco2 { width: 250px; height: 250px; background: var(--saffron); bottom: -60px; left: -60px; }
+
+    /* Animated mandala rings */
+    .hero-canvas { position: absolute; inset: 0; z-index: 0; }
+
+    /* Floating orbs */
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.18; animation: orbFloat 8s ease-in-out infinite; }
+    .orb1 { width: 500px; height: 500px; background: var(--gold); top: -150px; right: -150px; animation-delay: 0s; }
+    .orb2 { width: 320px; height: 320px; background: var(--saffron); bottom: -80px; left: -80px; animation-delay: -3s; }
+    .orb3 { width: 200px; height: 200px; background: #9B59B6; top: 40%; left: 5%; animation-delay: -5s; }
+    @keyframes orbFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+
+    /* Spinning mandala rings behind content */
+    .mandala-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(255,184,0,0.12); left: 50%; top: 50%; transform: translate(-50%,-50%); }
+    .ring1 { width: 300px; height: 300px; animation: spinSlow 30s linear infinite; border-width: 1px; }
+    .ring2 { width: 500px; height: 500px; animation: spinSlow 45s linear infinite reverse; border-width: 1px; }
+    .ring3 { width: 700px; height: 700px; animation: spinSlow 60s linear infinite; border-width: 1px; border-style: dashed; }
+    .ring4 { width: 900px; height: 900px; animation: spinSlow 80s linear infinite reverse; border-style: dotted; }
+    @keyframes spinSlow { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    /* Petal dots on rings */
+    .ring1::before, .ring2::before, .ring3::before {
+      content: ''; position: absolute; width: 6px; height: 6px;
+      background: var(--gold); border-radius: 50%; top: -3px; left: 50%; margin-left: -3px;
+      box-shadow: 0 0 8px var(--gold);
+    }
+    .ring2::after { content: '✦'; position: absolute; bottom: -10px; left: 50%; margin-left: -6px; color: var(--saffron); font-size: 0.7rem; opacity: 0.6; }
+
+    /* Particle dots */
+    .hero-particles { position: absolute; inset: 0; overflow: hidden; }
+    .particle { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0; animation: particleFade 4s ease-in-out infinite; }
+    @keyframes particleFade { 0%,100%{opacity:0;transform:translateY(0)} 50%{opacity:0.5;transform:translateY(-20px)} }
+
+    /* Shimmer on hero title */
+    @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .hero h1 span { background: linear-gradient(90deg, var(--gold), var(--saffron), #fff, var(--gold)); background-size: 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s ease infinite; }
+
+    /* Fade-in for hero content */
+    .hero-content { position: relative; z-index: 1; max-width: 780px; animation: heroFadeIn 1.2s ease forwards; }
+    @keyframes heroFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-deco { display: none; }
+    .deco1, .deco2 { display: none; }
     .hero-content { position: relative; z-index: 1; max-width: 780px; }
     .hero-badge { display: inline-block; background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 30px; margin-bottom: 24px; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.1; }
@@ -52,6 +90,9 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,0,0.5); }
     .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
     .btn-outline:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+    .btn-insta { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; box-shadow: 0 4px 20px rgba(131,58,180,0.4); }
+    .btn-insta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(131,58,180,0.6); }
+    .btn-insta svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
 
     /* SECTIONS */
     section { padding: 80px 5%; }
@@ -157,8 +198,12 @@
     #contact .section-label { color: var(--gold); }
     #contact .section-line { background: linear-gradient(90deg, var(--gold), #fff); }
     .contact-sub { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 40px; font-size: 1rem; line-height: 1.8; }
+    .contact-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
     .whatsapp-btn { display: inline-flex; align-items: center; gap: 12px; background: #25D366; color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(37,211,102,0.4); transition: all 0.3s; }
     .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,0.5); }
+    .insta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; padding: 18px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(131,58,180,0.4); transition: all 0.3s; }
+    .insta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(131,58,180,0.5); }
+    .insta-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
     .contact-note { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 20px; }
 
     /* SUBSCRIBE MODAL */
@@ -199,6 +244,98 @@
       .lightbox-inner img { max-height: 70vh; }
       .modal-box { padding: 32px 24px; }
     }
+
+    /* Honeypot - hidden from real users, bots fill it */
+    .hp-field { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; }
+
+    /* DISCOUNT BANNER */
+    .discount-banner { background: linear-gradient(90deg, var(--deep-red), var(--saffron), var(--gold)); color: #fff; text-align: center; padding: 10px 5%; font-size: 0.88rem; font-weight: 600; letter-spacing: 1px; position: relative; z-index: 999; top: 0; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .discount-banner span { background: rgba(255,255,255,0.2); padding: 3px 12px; border-radius: 20px; }
+    .discount-close { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; opacity: 0.7; margin-left: 8px; }
+
+    /* LATEST DROPS SCROLL */
+    #latest { background: var(--dark); padding: 40px 5%; }
+    #latest .section-label { color: var(--gold); }
+    #latest .section-title { color: #fff; }
+    .drops-scroll { display: flex; gap: 16px; overflow-x: auto; padding: 10px 4px 16px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; max-width: 1200px; margin: 0 auto; }
+    .drops-scroll::-webkit-scrollbar { height: 4px; }
+    .drops-scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    .drop-card { flex: 0 0 180px; scroll-snap-align: start; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,184,0,0.2); border-radius: 16px; overflow: hidden; cursor: zoom-in; transition: transform 0.3s; }
+    .drop-card:hover { transform: translateY(-4px); }
+    .drop-img { width: 180px; height: 180px; overflow: hidden; background: #222; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .drop-img img { width: 100%; height: 100%; object-fit: contain; }
+    .drop-info { padding: 10px 12px; }
+    .drop-info h4 { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: #fff; margin-bottom: 2px; }
+    .drop-info p { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+    .drop-badge { display: inline-block; background: var(--teal); color: #fff; font-size: 0.6rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 4px; }
+
+    /* VIDEO SECTION */
+    #making { background: #fff; padding: 80px 5%; }
+    .making-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .making-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--dark); margin-bottom: 16px; line-height: 1.3; }
+    .making-text h2 span { color: var(--saffron); }
+    .making-text p { color: #5a3e28; line-height: 1.9; font-size: 0.98rem; margin-bottom: 14px; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; background: var(--dark); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; }
+    .video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #1A0A00, #6A0572); cursor: pointer; }
+    .video-placeholder .play-btn { width: 64px; height: 64px; background: rgba(255,184,0,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+    .video-placeholder p { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+
+    /* DIY KITS */
+    #diy { background: #fff; padding: 80px 5%; }
+    .diy-intro { max-width: 720px; margin: 0 auto 60px; text-align: center; }
+    .diy-intro p { color: #5a3e28; font-size: 1rem; line-height: 1.9; }
+
+    /* Service cards — full width alternating layout */
+    .diy-service { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 1100px; margin: 0 auto 60px; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.09); }
+    .diy-service.reverse { direction: rtl; }
+    .diy-service.reverse > * { direction: ltr; }
+    .diy-service-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0; min-height: 380px; }
+    .diy-service-photos .photo-slot { overflow: hidden; background: #e8d5c0; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; }
+    .diy-service-photos .photo-slot img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .diy-service-photos .photo-slot:hover img { transform: scale(1.05); }
+    .diy-service-photos .photo-slot.span2 { grid-column: 1 / -1; }
+    .diy-service-content { background: #fff; padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .diy-service-content.warm { background: linear-gradient(160deg, #fff8f0, #fff3e0); }
+    .diy-service-content.dark { background: linear-gradient(160deg, #1A0A00, #3D0C02); }
+    .diy-service-content.dark h3 { color: var(--gold); }
+    .diy-service-content.dark p { color: #c4a07c; }
+    .diy-service-content.dark .diy-tag { background: rgba(255,184,0,0.15); color: var(--gold); }
+    .diy-service-content.dark li { color: #c4a07c; border-color: rgba(255,255,255,0.08); }
+    .diy-service-content.dark li::before { color: var(--gold); }
+    .diy-tag { display: inline-block; background: #fff3e0; color: var(--saffron); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+    .diy-service-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--dark); margin-bottom: 12px; line-height: 1.3; }
+    .diy-service-content p { color: #5a3e28; font-size: 0.92rem; line-height: 1.8; margin-bottom: 16px; }
+    .diy-includes { list-style: none; padding: 0; margin: 0 0 24px; }
+    .diy-includes li { font-size: 0.85rem; color: #7a5a3a; padding: 6px 0; border-bottom: 1px solid #f0e8dc; display: flex; align-items: center; gap: 8px; }
+    .diy-includes li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; flex-shrink: 0; }
+    .diy-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .diy-enquire { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--saffron), var(--gold)); color: #fff; border: none; padding: 11px 22px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+    .diy-enquire:hover { opacity: 0.88; transform: translateY(-2px); }
+    .diy-bulk { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--saffron); border: 2px solid var(--saffron); padding: 11px 22px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+    .diy-bulk:hover { background: var(--saffron); color: #fff; }
+
+    /* Bundle banner */
+    .bundle-banner { background: linear-gradient(135deg, #1A0A00, #6A0572); border-radius: 20px; padding: 36px 40px; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .bundle-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+    .bundle-banner p { color: #c4a07c; font-size: 0.9rem; }
+    .bundle-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .bundle-tag { background: rgba(255,184,0,0.15); color: var(--gold); border: 1px solid rgba(255,184,0,0.3); padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .diy-service { grid-template-columns: 1fr; }
+      .diy-service.reverse { direction: ltr; }
+      .diy-service-photos { min-height: 260px; grid-template-columns: 1fr 1fr; }
+    }
+
+    /* INSTAGRAM CHAT FLOAT */
+    .float-insta { position: fixed; bottom: 100px; right: 28px; z-index: 999; background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 20px rgba(131,58,180,0.5); transition: all 0.3s; }
+    .float-insta:hover { transform: scale(1.12); }
+    .float-insta svg { width: 24px; height: 24px; fill: #fff; }
+
+    @media (max-width: 900px) { .making-grid { grid-template-columns: 1fr; gap: 36px; } }
+    @media (max-width: 768px) { .diy-grid { grid-template-columns: 1fr; } }
+
   </style>
 </head>
 <body>
@@ -222,6 +359,8 @@
     <div class="subscribe-form">
       <input type="text" id="sub-name" placeholder="Your name" />
       <input type="email" id="sub-email" placeholder="Your email address" />
+      <!-- Honeypot: real users never see or fill this -->
+      <input type="text" id="sub-hp" name="website" autocomplete="off" tabindex="-1" class="hp-field" />
       <button onclick="handleSubscribe()">Notify Me of New Art ✨</button>
     </div>
     <div class="subscribe-success" id="sub-success">🎉 You're in! We'll let you know when new art is added.</div>
@@ -236,6 +375,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#trending">Trending</a></li>
       <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#diy">DIY Kits</a></li>
       <li><a href="#teach">Learn Art</a></li>
       <li><a href="#contact">Contact</a></li>
       <li>
@@ -251,15 +391,27 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-deco deco1"></div>
-  <div class="hero-deco deco2"></div>
+  <!-- Animated background elements -->
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+  <div class="mandala-ring ring1"></div>
+  <div class="mandala-ring ring2"></div>
+  <div class="mandala-ring ring3"></div>
+  <div class="mandala-ring ring4"></div>
+  <div class="hero-particles" id="hero-particles"></div>
+
   <div class="hero-content">
     <div class="hero-badge">✦ Authentic Handmade Art ✦</div>
     <h1><span>Where</span> Tradition<br/>Meets Beauty</h1>
     <p>Each piece is a journey through India's rich artistic heritage — handcrafted with love, patience, and generations of mastery.</p>
     <div class="hero-btns">
       <a href="#gallery" class="btn btn-primary">🎨 Explore Gallery</a>
-      <a href="#contact" class="btn btn-outline">💬 Chat on WhatsApp</a>
+      <a href="#" id="hero-wa-btn" class="btn btn-outline" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a href="#" id="hero-insta-btn" class="btn btn-insta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
     </div>
   </div>
 </section>
@@ -346,6 +498,41 @@
   </div>
 </section>
 
+<!-- LATEST DROPS -->
+<section id="latest">
+  <div class="section-header" style="margin-bottom:32px">
+    <div class="section-label">✦ Fresh Off the Easel</div>
+    <h2 class="section-title">Latest <span style="color:var(--gold)">Drops</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="drops-scroll" id="drops-scroll"></div>
+  <p class="scroll-hint" style="color:#c4a07c;margin-top:8px">← swipe to see new arrivals →</p>
+</section>
+
+<!-- MAKING VIDEO -->
+<section id="making">
+  <div class="section-header">
+    <div class="section-label">✦ Watch It Come to Life</div>
+    <h2 class="section-title">See the <span>Magic</span> Happen</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="making-grid">
+    <div class="making-text">
+      <h2>Every piece starts with a <span>blank canvas</span> and a lot of heart 🌸</h2>
+      <p>There's something deeply meditative about making Lippan art — the repetition, the patience, the moment a mirror catches the light for the first time.</p>
+      <p>Watch how a plain board transforms into something you'd want to hang in your home — from the first sketch all the way to the final seal.</p>
+    </div>
+    <div class="video-wrap">
+      <div class="video-placeholder" id="video-placeholder" onclick="loadVideo()">
+        <div class="play-btn">▶</div>
+        <p>Watch the making process</p>
+        <p style="font-size:0.75rem;margin-top:-8px;color:rgba(255,255,255,0.4)">Add your Instagram Reel or YouTube link in config.js</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- TRENDING -->
 <section id="trending">
   <div class="section-header">
@@ -366,6 +553,119 @@
   <div class="gallery-filter" id="gallery-filter"></div>
   <div class="gallery-grid" id="gallery-grid"></div>
 </section>
+
+<!-- DIY KITS -->
+<section id="diy">
+  <div class="section-header">
+    <div class="section-label">✦ Create Together</div>
+    <h2 class="section-title">DIY <span>Kits & Events</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="diy-intro">
+    <p>I believe art is for everyone — not just for those who've "always been creative." Whether it's a room full of 7-year-olds at a birthday party or a team of 50 at a corporate offsite, I bring everything needed to make it a beautiful, memorable experience. 🎨</p>
+  </div>
+
+  <!-- SERVICE 1: KIDS BIRTHDAY -->
+  <div class="diy-service" style="margin-bottom:40px">
+    <div class="diy-service-photos" id="diy-photos-kids">
+      <div class="photo-slot"><img src="images/diy_kids1.jpg" alt="Kids art session" onerror="this.style.display='none'" />🎨</div>
+      <div class="photo-slot"><img src="images/diy_kids2.jpg" alt="Kids creating art" onerror="this.style.display='none'" />🖌️</div>
+      <div class="photo-slot"><img src="images/diy_kids3.jpg" alt="Finished kids art" onerror="this.style.display='none'" />✨</div>
+      <div class="photo-slot"><img src="images/diy_kids4.jpg" alt="Kids with artwork" onerror="this.style.display='none'" />🌸</div>
+    </div>
+    <div class="diy-service-content warm">
+      <span class="diy-tag">🎂 Birthdays · Live Art Sessions</span>
+      <h3>Turn a birthday into a moment they'll never forget</h3>
+      <p>Imagine every child at the party sitting together, getting their hands in clay, pressing in tiny mirrors, and watching something truly beautiful come to life — something <em>they</em> made. That's what this is.</p>
+      <p>I come to your venue, set everything up, guide the kids through a fun Lippan Art session, and at the end of the day — every child goes home with their very own finished art piece. Not a goodie bag. A real piece of art they made themselves. 🌟</p>
+      <ul class="diy-includes">
+        <li>Guided live art session by Swetha</li>
+        <li>All materials — clay, mirrors, boards, colors</li>
+        <li>Each child takes home their finished artwork</li>
+        <li>Suitable for ages 5 and up</li>
+        <li>Session duration: 60–90 minutes</li>
+        <li>Groups of 10–30 kids</li>
+      </ul>
+      <div class="diy-btns">
+        <a href="#" class="diy-enquire" id="diy-wa-kids">💬 Book a Session</a>
+        <a href="#" class="diy-bulk" id="diy-bulk-kids">📦 Bulk Kit Enquiry</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 2: GATHERINGS & RETURN GIFTS -->
+  <div class="diy-service reverse" style="margin-bottom:40px">
+    <div class="diy-service-photos" id="diy-photos-events">
+      <div class="photo-slot"><img src="images/diy_event1.jpg" alt="Event art kit" onerror="this.style.display='none'" />🌺</div>
+      <div class="photo-slot"><img src="images/diy_event2.jpg" alt="Return gifts" onerror="this.style.display='none'" />🎁</div>
+      <div class="photo-slot"><img src="images/diy_event3.jpg" alt="Pooja peta" onerror="this.style.display='none'" />🪔</div>
+      <div class="photo-slot"><img src="images/diy_event4.jpg" alt="Home decor" onerror="this.style.display='none'" />🏠</div>
+    </div>
+    <div class="diy-service-content warm">
+      <span class="diy-tag">🌸 Gatherings · Return Gifts · Home Decor</span>
+      <h3>Gifts that carry meaning — not just a price tag</h3>
+      <p>For pujas, housewarming parties, baby showers, cultural celebrations — I create custom kits and hand-finished pieces that feel personal and rooted in tradition. Something your guests will actually keep.</p>
+      <p>From traditional <strong>Pooja peta's</strong> to custom home decor and ready-to-gift return kits, everything can be tailored to your occasion, colors, and quantity.</p>
+      <ul class="diy-includes">
+        <li>Custom Lippan Art return gift kits</li>
+        <li>Traditional Indian Pooja peta's (handmade)</li>
+        <li>Home decor pieces — wall art, mirrors, frames</li>
+        <li>Personalized with names or occasion</li>
+        <li>Bulk orders for 20–200+ pieces</li>
+        <li>2–3 weeks lead time for large orders</li>
+      </ul>
+      <div class="diy-btns">
+        <a href="#" class="diy-enquire" id="diy-wa-events">💬 Enquire Now</a>
+        <a href="#" class="diy-bulk" id="diy-bulk-events">📦 Bulk Order Pricing</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 3: CORPORATE -->
+  <div class="diy-service" style="margin-bottom:48px">
+    <div class="diy-service-photos" id="diy-photos-corp">
+      <div class="photo-slot"><img src="images/diy_corp1.jpg" alt="Corporate art session" onerror="this.style.display='none'" />🏢</div>
+      <div class="photo-slot"><img src="images/diy_corp2.jpg" alt="Team art activity" onerror="this.style.display='none'" />🤝</div>
+      <div class="photo-slot"><img src="images/diy_corp3.jpg" alt="Corporate workshop" onerror="this.style.display='none'" />🎨</div>
+      <div class="photo-slot"><img src="images/diy_corp4.jpg" alt="Team with artwork" onerror="this.style.display='none'" />✨</div>
+    </div>
+    <div class="diy-service-content dark">
+      <span class="diy-tag" style="background:rgba(255,184,0,0.15);color:var(--gold)">🏢 Corporate · Team Events</span>
+      <h3>Give your team an afternoon they'll actually talk about</h3>
+      <p>There's something that happens when you sit someone down in front of clay and mirrors and say — "just create." Screens go away. Stress softens. People laugh, focus, and leave feeling lighter.</p>
+      <p>These sessions are designed for corporate teams who want something more meaningful than a lunch outing — a real hands-on experience where everyone gets to slow down, pick their own colors, design their own piece, and walk away with something beautiful they made themselves.</p>
+      <ul class="diy-includes">
+        <li>Fully guided workshop — no experience needed</li>
+        <li>Everyone designs their own unique piece</li>
+        <li>All materials and setup included</li>
+        <li>Certificate of participation available</li>
+        <li>Flexible group sizes: 15–100+ people</li>
+        <li>On-site at your office or chosen venue</li>
+        <li>2–3 hour sessions, fully customizable</li>
+      </ul>
+      <div class="diy-btns">
+        <a href="#" class="diy-enquire" id="diy-wa-corp">💬 Plan an Event</a>
+        <a href="#" class="diy-bulk" id="diy-bulk-corp" style="border-color:var(--gold);color:var(--gold)">📋 Get a Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNDLE BANNER -->
+  <div class="bundle-banner">
+    <div>
+      <h3>🎁 Ordering for a large group?</h3>
+      <p>Get custom pricing on bulk orders of 20+ kits or pieces. Perfect for weddings, corporate gifting, school events and cultural festivals.</p>
+      <div class="bundle-tags">
+        <span class="bundle-tag">20% off on 50+ pieces</span>
+        <span class="bundle-tag">Custom packaging</span>
+        <span class="bundle-tag">Name personalization</span>
+        <span class="bundle-tag">Flexible lead times</span>
+      </div>
+    </div>
+    <a href="#" class="diy-enquire" id="diy-wa-bulk" style="white-space:nowrap;flex-shrink:0">💬 Get Bulk Pricing</a>
+  </div>
+</section>
+
 
 <!-- LEARN ART / TEACH -->
 <section id="teach">
@@ -394,6 +694,8 @@
         <input type="text" id="teach-name" placeholder="Your full name *" />
         <input type="email" id="teach-email" placeholder="Your email address *" />
         <input type="tel" id="teach-phone" placeholder="Your phone number (optional)" />
+        <!-- Honeypot: real users never see or fill this -->
+        <input type="text" id="teach-hp" name="website" autocomplete="off" tabindex="-1" class="hp-field" />
         <select id="teach-interest">
           <option value="">I'm interested in... *</option>
           <option value="kids">Classes for my child</option>
@@ -418,11 +720,17 @@
     <h2 class="section-title">Interested in a Piece?</h2>
     <div class="section-line"></div>
   </div>
-  <p class="contact-sub">Whether you'd like to buy, commission a custom artwork, or simply know more — reach out directly on WhatsApp for the fastest response.</p>
-  <a id="wa-main-btn" href="#" class="whatsapp-btn" target="_blank" rel="noopener">
-    <span style="font-size:1.5rem">💬</span> Chat on WhatsApp
-  </a>
-  <p class="contact-note">Tap to open WhatsApp · Replies within a few hours</p>
+  <p class="contact-sub">Whether you'd like to buy a piece, ask about a custom order, or just say hi — reach out on WhatsApp or Instagram. I'd love to hear from you! 🌸</p>
+  <div class="contact-btns">
+    <a id="wa-main-btn" href="#" class="whatsapp-btn" target="_blank" rel="noopener">
+      <span style="font-size:1.4rem">💬</span> Chat on WhatsApp
+    </a>
+    <a id="insta-main-btn" href="#" class="insta-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Message on Instagram
+    </a>
+  </div>
+  <p class="contact-note">WhatsApp · fastest response &nbsp;|&nbsp; Instagram DM · for inspiration & updates</p>
 </section>
 
 <!-- FOOTER -->
@@ -438,11 +746,18 @@
   <p>© 2025 <span>SweArts LLC</span> · All Rights Reserved · Handcrafted with ❤️</p>
 </footer>
 
+<a class="float-insta" id="float-insta" href="#" target="_blank" rel="noopener" title="Chat on Instagram">
+  <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+</a>
 <a class="float-wa" id="wa-float-btn" href="#" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
 
+<!-- DISCOUNT BANNER -->
+<div class="discount-banner" id="discount-banner">
+  🎉 <span>LIMITED TIME</span> Free shipping on orders over $150 &nbsp;·&nbsp; Use code <span>SWEARTS10</span> for 10% off your first order
+  <button class="discount-close" onclick="document.getElementById('discount-banner').style.display='none'">✕</button>
+</div>
 <script src="config.js"></script>
 <script>
-// ── Lightbox ──────────────────────────────────────────────
 function openLightbox(src, title) {
   document.getElementById("lightbox-img").src = src;
   document.getElementById("lightbox-title").textContent = title;
@@ -454,7 +769,6 @@ function closeLightbox(e) {
   document.getElementById("lightbox").classList.remove("open");
   document.body.style.overflow = "";
 }
-
 function openModal() {
   document.getElementById("subscribeModal").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -464,55 +778,58 @@ function closeModal(e) {
   document.getElementById("subscribeModal").classList.remove("open");
   document.body.style.overflow = "";
 }
-
 function handleSubscribe() {
   var email = (document.getElementById("sub-email").value || "").trim();
   var name  = (document.getElementById("sub-name").value || "").trim();
+  var hp    = (document.getElementById("sub-hp").value || "").trim();
+  if (hp) { document.querySelector(".subscribe-form").style.display="none"; document.getElementById("sub-success").style.display="block"; return; }
   if (!email || !email.includes("@")) { alert("Please enter a valid email."); return; }
   document.querySelector(".subscribe-form").style.display = "none";
   document.getElementById("sub-success").style.display = "block";
-  var formData = new URLSearchParams();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("type", "Newsletter Subscriber");
-  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: formData });
+  var fd = new URLSearchParams();
+  fd.append("name", name); fd.append("email", email); fd.append("type", "Newsletter Subscriber");
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: fd });
 }
-
 function handleTeachSignup() {
   var name     = (document.getElementById("teach-name").value || "").trim();
   var email    = (document.getElementById("teach-email").value || "").trim();
   var phone    = (document.getElementById("teach-phone").value || "").trim();
   var interest = document.getElementById("teach-interest").value;
+  var hp       = (document.getElementById("teach-hp").value || "").trim();
+  if (hp) { document.getElementById("teach-form").style.display="none"; document.getElementById("teach-success").style.display="block"; return; }
   if (!name)    { alert("Please enter your name."); return; }
   if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
   if (!interest){ alert("Please select what you are interested in."); return; }
   document.getElementById("teach-form").style.display = "none";
   document.getElementById("teach-success").style.display = "block";
-  var formData = new URLSearchParams();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("interest", interest);
-  formData.append("type", "Art Class Interest");
-  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: formData });
+  var fd = new URLSearchParams();
+  fd.append("name", name); fd.append("email", email); fd.append("phone", phone);
+  fd.append("interest", interest); fd.append("type", "Art Class Interest");
+  fetch("https://script.google.com/macros/s/AKfycbx4fOX3U3VXdrLoyG4sEm3SYrHJynbEVTsWH60EbyI-NyCA06yxRgfBq9Zxx-x1bwUe3w/exec", { method: "POST", mode: "no-cors", body: fd });
+}
+
+// Video — supports both Instagram Reels and YouTube
+function loadVideo() {
+  var url = (typeof SITE_CONFIG !== "undefined" && SITE_CONFIG.artist.video) ? SITE_CONFIG.artist.video : "";
+  if (!url) { alert("Add your Instagram Reel or YouTube URL to config.js under artist.video"); return; }
+  var wrap = document.getElementById("video-placeholder").parentNode;
+  // YouTube
+  var ytMatch = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
+  if (ytMatch) {
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytMatch[1] + '?autoplay=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
+    return;
+  }
+  // Instagram Reel — can't embed directly, open in new tab
+  if (url.includes("instagram.com")) {
+    window.open(url, "_blank");
+    return;
+  }
+  // Fallback
+  window.open(url, "_blank");
 }
 
 function waLink(number, msg) {
   return "https://api.whatsapp.com/send?phone=" + number + "&text=" + encodeURIComponent(msg);
-}
-
-function makeImg(src, emoji, style) {
-  var img = document.createElement("img");
-  img.src = src;
-  img.alt = "";
-  img.style.cssText = style || "width:100%;height:100%;object-fit:contain;";
-  img.addEventListener("error", function() {
-    var span = document.createElement("span");
-    span.style.fontSize = "4rem";
-    span.textContent = emoji;
-    img.parentNode.replaceChild(span, img);
-  });
-  return img;
 }
 
 document.addEventListener("keydown", function(e) {
@@ -529,57 +846,114 @@ document.addEventListener("DOMContentLoaded", function() {
 
   document.getElementById("stat-sold").textContent   = c.artist.artworks_sold;
   document.getElementById("stat-styles").textContent = c.artist.art_styles;
-  document.getElementById("nav-insta").href    = c.artist.instagram || "#";
-  document.getElementById("footer-insta").href = c.artist.instagram || "#";
+
+  var instaUrl = c.artist.instagram || "#";
+  document.getElementById("nav-insta").href    = instaUrl;
+  document.getElementById("footer-insta").href = instaUrl;
   document.getElementById("footer-email").href = c.artist.gmail ? "mailto:" + c.artist.gmail : "#";
+  document.getElementById("float-insta").href  = instaUrl;
 
   var waMsg = "Hi SweArts! I visited your website and I'm interested in your artwork.";
   document.getElementById("wa-main-btn").href  = waLink(wa, waMsg);
   document.getElementById("wa-float-btn").href = waLink(wa, waMsg);
+  document.getElementById("insta-main-btn").href = instaUrl;
+
+  // Hero buttons
+  document.getElementById("hero-wa-btn").href    = waLink(wa, waMsg);
+  document.getElementById("hero-insta-btn").href = instaUrl;
+
+  // Particle animation
+  var pContainer = document.getElementById("hero-particles");
+  if (pContainer) {
+    for (var p = 0; p < 24; p++) {
+      var dot = document.createElement("div");
+      dot.className = "particle";
+      dot.style.left = Math.random() * 100 + "%";
+      dot.style.top  = Math.random() * 100 + "%";
+      dot.style.animationDelay = (Math.random() * 4) + "s";
+      dot.style.animationDuration = (3 + Math.random() * 4) + "s";
+      dot.style.width  = (Math.random() > 0.5 ? "4px" : "2px");
+      dot.style.height = dot.style.width;
+      dot.style.opacity = (0.2 + Math.random() * 0.4).toString();
+      pContainer.appendChild(dot);
+    }
+  }
+
+  // ── DIY WhatsApp links ──
+  var diyLinks = {
+    "diy-wa-kids":   "Hi SweArts! I'd love to book a live art session for a kids birthday party. Can you share more details?",
+    "diy-bulk-kids": "Hi SweArts! I'm interested in bulk DIY kits for a kids event. How does bulk pricing work?",
+    "diy-wa-events": "Hi SweArts! I'm interested in custom return gifts / Pooja peta's for an upcoming event. Can you help?",
+    "diy-bulk-events":"Hi SweArts! I'd like to enquire about bulk order pricing for 20+ pieces for an event.",
+    "diy-wa-corp":   "Hi SweArts! I'd love to plan a corporate art workshop for my team. Can we discuss details?",
+    "diy-bulk-corp": "Hi SweArts! Can I get a quote for a corporate art event? I'd like to know about group sizes and pricing.",
+    "diy-wa-bulk":   "Hi SweArts! I'm interested in a bulk order of 20+ pieces. Can you share custom pricing?"
+  };
+  Object.keys(diyLinks).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.href = waLink(wa, diyLinks[id]);
+  });
+
+  // ── Latest Drops — last 8 available from gallery ──
+  var drops = c.gallery.filter(function(a) { return a.image && a.status !== "sold"; }).slice(-8).reverse();
+  var dScroll = document.getElementById("drops-scroll");
+  if (dScroll) {
+    drops.forEach(function(art) {
+      var card = document.createElement("div");
+      card.className = "drop-card";
+      var imgDiv = document.createElement("div");
+      imgDiv.className = "drop-img";
+      imgDiv.style.background = art.gradient;
+      var img = document.createElement("img");
+      img.src = art.image; img.alt = art.title;
+      img.style.cssText = "width:100%;height:100%;object-fit:contain;";
+      img.addEventListener("error", function() { imgDiv.innerHTML = '<span style="font-size:3rem">' + art.emoji + '</span>'; });
+      imgDiv.appendChild(img);
+      var info = document.createElement("div");
+      info.className = "drop-info";
+      info.innerHTML = '<span class="drop-badge">New</span><h4>' + art.title + '</h4><p>' + art.price + '</p>';
+      card.appendChild(imgDiv);
+      card.appendChild(info);
+      card.addEventListener("click", function() { openLightbox(art.image, art.title); });
+      dScroll.appendChild(card);
+    });
+  }
 
   // ── Trending ──
   var tGrid = document.getElementById("trending-grid");
   c.trending.forEach(function(item) {
     var card = document.createElement("div");
     card.className = "trending-card";
-
     var imgWrap = document.createElement("div");
     imgWrap.className = "trending-img";
     imgWrap.style.background = item.gradient;
-
     if (item.image) {
-      imgWrap.appendChild(makeImg(item.image, item.emoji));
+      var img = document.createElement("img");
+      img.src = item.image; img.alt = item.title;
+      img.style.cssText = "width:100%;height:100%;object-fit:contain;";
+      img.addEventListener("error", function() { var s=document.createElement("span"); s.style.fontSize="4rem"; s.textContent=item.emoji; img.parentNode.replaceChild(s,img); });
+      imgWrap.appendChild(img);
       imgWrap.style.cursor = "zoom-in";
       imgWrap.addEventListener("click", function() { openLightbox(item.image, item.title); });
-    } else {
-      var sp = document.createElement("span");
-      sp.style.fontSize = "5rem";
-      sp.textContent = item.emoji;
-      imgWrap.appendChild(sp);
-    }
-
+    } else { imgWrap.innerHTML = '<span style="font-size:5rem">' + item.emoji + '</span>'; }
     var info = document.createElement("div");
     info.className = "trending-info";
     info.innerHTML = "<h3>" + item.title + "</h3><p>" + item.description + "</p><span class='trending-tag'>" + item.tag + "</span>";
-
-    card.appendChild(imgWrap);
-    card.appendChild(info);
+    card.appendChild(imgWrap); card.appendChild(info);
     tGrid.appendChild(card);
   });
 
   // ── Gallery filter ──
-  var seen = {};
-  var categories = ["All"];
-  c.gallery.forEach(function(a) { if (!seen[a.category]) { seen[a.category] = true; categories.push(a.category); } });
+  var seen = {}; var categories = ["All"];
+  c.gallery.forEach(function(a) { if (!seen[a.category]) { seen[a.category]=true; categories.push(a.category); } });
   var fContainer = document.getElementById("gallery-filter");
   categories.forEach(function(cat, i) {
     var btn = document.createElement("button");
-    btn.className = "filter-btn" + (i === 0 ? " active" : "");
+    btn.className = "filter-btn" + (i===0?" active":"");
     btn.textContent = cat;
     btn.addEventListener("click", function() {
-      document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
-      btn.classList.add("active");
-      filterGallery(cat);
+      document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active");});
+      btn.classList.add("active"); filterGallery(cat);
     });
     fContainer.appendChild(btn);
   });
@@ -590,63 +964,32 @@ document.addEventListener("DOMContentLoaded", function() {
     var enquireMsg = art.status === "sold"
       ? "Hi SweArts! I saw \"" + art.title + "\" on your website. Do you have similar pieces available?"
       : "Hi SweArts! I saw \"" + art.title + "\" on your website (" + art.type + "). I'd love to know more!";
-
     var card = document.createElement("div");
-    card.className = "art-card";
-    card.dataset.category = art.category;
-    card.dataset.status = art.status;
-
-    // Image wrapper
+    card.className = "art-card"; card.dataset.category = art.category; card.dataset.status = art.status;
     var imgDiv = document.createElement("div");
-    imgDiv.className = "art-img";
-    imgDiv.style.background = art.gradient;
-
-    // Badge
-    if (art.status === "sold") {
-      var b = document.createElement("span");
-      b.className = "art-badge badge-sold";
-      b.textContent = "Sold";
-      imgDiv.appendChild(b);
-    } else if (art.status === "new") {
-      var b = document.createElement("span");
-      b.className = "art-badge badge-new";
-      b.textContent = "New";
-      imgDiv.appendChild(b);
-    }
-
-    // Image or emoji
+    imgDiv.className = "art-img"; imgDiv.style.background = art.gradient;
+    if (art.status==="sold") { var b=document.createElement("span"); b.className="art-badge badge-sold"; b.textContent="Sold"; imgDiv.appendChild(b); }
+    else if (art.status==="new") { var b=document.createElement("span"); b.className="art-badge badge-new"; b.textContent="New"; imgDiv.appendChild(b); }
     if (art.image) {
-      imgDiv.appendChild(makeImg(art.image, art.emoji));
+      var img = document.createElement("img");
+      img.src = art.image; img.alt = art.title;
+      img.style.cssText = "width:100%;height:100%;object-fit:contain;";
+      img.addEventListener("error", function() { var s=document.createElement("span"); s.style.fontSize="4rem"; s.textContent=art.emoji; img.parentNode.replaceChild(s,img); });
+      imgDiv.appendChild(img);
       imgDiv.style.cursor = "zoom-in";
       imgDiv.addEventListener("click", function() { openLightbox(art.image, art.title); });
-    } else {
-      var sp = document.createElement("span");
-      sp.style.fontSize = "5rem";
-      sp.textContent = art.emoji;
-      imgDiv.appendChild(sp);
-    }
-
-    // Info
-    var info = document.createElement("div");
-    info.className = "art-info";
-    info.innerHTML =
-      "<h3>" + art.title + "</h3>" +
-      "<div class='art-type'>" + art.type + "</div>" +
-      "<div class='art-footer'>" +
-        "<div class='art-price'>" + art.price + "</div>" +
-        "<a href='" + waLink(wa, enquireMsg) + "' class='btn-enquire' target='_blank'>" +
-          (art.status === "sold" ? "Similar?" : "Enquire") +
-        "</a>" +
-      "</div>";
-
-    card.appendChild(imgDiv);
-    card.appendChild(info);
+    } else { var sp=document.createElement("span"); sp.style.fontSize="5rem"; sp.textContent=art.emoji; imgDiv.appendChild(sp); }
+    var info = document.createElement("div"); info.className = "art-info";
+    info.innerHTML = "<h3>" + art.title + "</h3><div class='art-type'>" + art.type + "</div>" +
+      "<div class='art-footer'><div class='art-price'>" + art.price + "</div>" +
+      "<a href='" + waLink(wa, enquireMsg) + "' class='btn-enquire' target='_blank'>" + (art.status==="sold"?"Similar?":"Enquire") + "</a></div>";
+    card.appendChild(imgDiv); card.appendChild(info);
     gGrid.appendChild(card);
   });
 
   function filterGallery(cat) {
     document.querySelectorAll(".art-card").forEach(function(card) {
-      card.style.display = (cat === "All" || card.dataset.category === cat) ? "block" : "none";
+      card.style.display = (cat==="All" || card.dataset.category===cat) ? "block" : "none";
     });
   }
 });
