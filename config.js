@@ -16,6 +16,7 @@ const SITE_CONFIG = {
     art_styles: "10+",
     whatsapp: "19472758363",        // ← Replace with your US number e.g. 14155551234
     photo: "",
+    video: "https://www.instagram.com/reel/DWSluHxDWqy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", 
     instagram: "https://www.instagram.com/reel/DWSluHxDWqy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",  // ← Replace with your Instagram URL
     gmail: "sweartworks@gmail.com",                              // ← Replace with your Gmail
   },
