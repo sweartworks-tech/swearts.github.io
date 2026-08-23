@@ -1,0 +1,7 @@
+# Raw/original photos — not used by the live site.
+# Keep these locally or in separate cloud storage, not in this repo.
+_originals-not-published/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
