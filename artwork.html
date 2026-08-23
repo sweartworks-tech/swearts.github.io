@@ -4,7 +4,7 @@
 let C={};const id=new URLSearchParams(location.search).get('id')||'';
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const wa=a=>'https://api.whatsapp.com/send?phone='+C.artist.whatsapp+'&text='+encodeURIComponent('Hi SweArts! I’m interested in “'+a.title+'”. I’d love to know more about this piece.');
-function findArt(){return (C.gallery||[]).find(a=>a.id===id||a.title===id)||(C.gallery||[]).find(a=>a.image===id)}
+function findArt(){const key=decodeURIComponent(id);return (C.gallery||[]).find(a=>a.id===key||a.title===key||a.image===key)||(C.gallery||[]).find(a=>a.id===id)}
 function showPhoto(src){$('#mainPhoto').src=src}
 function render(a){
  document.title=(a.title||'Artwork')+' — SweArts';const shortDesc=(a.story||a.type||'Handcrafted artwork by SweArts').slice(0,155);$('meta[name="description"]').content=shortDesc;$('#float-wa').href=wa(a);
